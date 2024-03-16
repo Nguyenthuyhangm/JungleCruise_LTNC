@@ -1,41 +1,36 @@
 ﻿#define _CRT_SECURE_NO_DEPRECATE
+#include<iostream>
+#include<fstream>
+using namespace std;
 #include "game_map.h"
 
-// đọc file 
 void GameMap::LoadMap(char* name)
 {
-    FILE* fp = fopen(name, "rb");
-    if (fp == NULL) {
+    ifstream fi("map01.dat");
+    if (!fi) {
+        cout << "Error!" << endl;
         return;
     }
-    game_map_.max_x_ = 0;
-    game_map_.max_y_ = 0;
-    for (int i = 0; i < MAX_MAP_Y; i++)
-    {
-        for (int j = 0; j < MAX_MAP_X; j++)
-        {
-            //Đọc một số nguyên từ tệp được mở fp và lưu trữ giá trị đó vào biến game_map_.tile[i][j]
-            fscanf_s(fp, "%d", &game_map_.tile[i][j]);
+    for (int i = 0; i < MAX_MAP_Y; i++) {
+        for (int j = 0; j < MAX_MAP_X; j++) {
+            fi >> game_map_.tile[i][j];
             int val = game_map_.tile[i][j];
             if (val > 0) {
-                if (j > game_map_.max_x_) {
-                    game_map_.max_x_ = j;
-                }
-
-                if (i > game_map_.max_y_) {
-                    game_map_.max_y_ = i;
-                }
+                if (j > game_map_.max_x_) { game_map_.max_x_ = j; }
+                if (i > game_map_.max_y_) { game_map_.max_y_ = i; }
             }
         }
     }
-    game_map_.max_x_ = (game_map_.max_x_ + 1) * TILE_SIZE;
+    game_map_.max_x_ = (game_map_.max_x_ + 1) *TILE_SIZE;
     game_map_.max_y_ = (game_map_.max_y_ + 1) * TILE_SIZE;
 
     game_map_.start_x_ = 0;
     game_map_.start_y_ = 0;
+
     game_map_.file_name_ = name;
-    fclose(fp);
-}
+    fi.close();
+};
+
 
 //LoadTile 
 void GameMap::LoadTile(SDL_Renderer* screen)
