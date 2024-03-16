@@ -1,7 +1,9 @@
-#include"CommonFunction.h"
+﻿#include"CommonFunction.h"
 #include"BaseObject.h"
+#include"game_map.h"
 
-BaseObject g_background;
+BaseObject g_background3;
+
 
 bool  InitData()
 {
@@ -12,7 +14,7 @@ bool  InitData()
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
-	g_window = SDL_CreateWindow("Game Explore The Universe", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	g_window = SDL_CreateWindow("Game Jungle Cruise", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 	if (g_window == NULL)
 	{
@@ -33,10 +35,10 @@ bool  InitData()
 	}
 	return success;
 }
-
+// Đóng cửa sổ
 void close()
 {
-	g_background.Free();
+	g_background3.Free();//Giải phóng bộ nhớ 
 
 	SDL_DestroyRenderer(g_screen);
 	g_screen = NULL;
@@ -49,9 +51,9 @@ void close()
 
 }
 
-bool LoadBackGround()
+bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay không
 {
-	bool ret = g_background.LoadImg("background1.jpg", g_screen);
+	bool ret = g_background3.LoadImg("background.png", g_screen);
 	if (ret == false)
 		return false;
 
@@ -62,8 +64,17 @@ int main(int argc, char* argv[])
 {
 	if (InitData() == false)
 		return -1;
-	if (LoadBackGround() == false)
+	if (LoadBackGround3() == false)
 		return -1;
+
+	GameMap game_map;
+	//fill ảnh đất
+	//Đọc map viết bởi số 0 1 2 
+	char file_path[] = "map01.dat";
+	game_map.LoadMap(file_path);
+	//Load các hình ảnh tương ứng vào ô 1 2 3
+	game_map.LoadTile(g_screen);
+
 
 	bool is_quit = false;
 	while (!is_quit)
@@ -78,7 +89,9 @@ int main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(g_screen, 255, 255, 255, 255);
 		SDL_RenderClear(g_screen);
 
-		g_background.Render(g_screen, NULL);
+		g_background3.Render(g_screen, NULL);
+		game_map.DrawMap(g_screen);
+
 		SDL_RenderPresent(g_screen);
 	}
 
