@@ -79,9 +79,7 @@ int main(int argc, char* argv[])
 	MainObject p_player;
 	p_player.LoadImg("Base//Run.png",g_screen);
 	p_player.Animation();
-
-
-
+	
 
 	bool is_quit = false;
 	while (!is_quit)
@@ -100,7 +98,9 @@ int main(int argc, char* argv[])
 
 		g_background3.Render(g_screen, NULL);
 		game_map.DrawMap(g_screen);
+		Map map_data = game_map.getMap();
 
+		p_player.DoPlayer(map_data);
 		p_player.Show(g_screen);
 
 		SDL_RenderPresent(g_screen);

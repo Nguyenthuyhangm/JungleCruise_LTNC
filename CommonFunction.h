@@ -31,7 +31,6 @@ const int COLOR_KEY_B = 180;
 //cau truc du lieu di chuyen
 
 struct Input {
-	int left_;
 	int right_;
 	int up_;
 	int jump_;

@@ -26,7 +26,9 @@ public:
 	void LoadMap(char* name);
 	void LoadTile(SDL_Renderer* screen);
 	void DrawMap(SDL_Renderer* screen);
-
+	Map getMap()const {
+		return game_map_;
+	};
 private:
 	Map game_map_;
 	TileMap tile_map[20];
