@@ -1,6 +1,7 @@
 ﻿#include"CommonFunction.h"
 #include"BaseObject.h"
 #include"game_map.h"
+#include"MainObject.h"
 
 BaseObject g_background3;
 
@@ -75,6 +76,12 @@ int main(int argc, char* argv[])
 	//Load các hình ảnh tương ứng vào ô 1 2 3
 	game_map.LoadTile(g_screen);
 
+	MainObject p_player;
+	p_player.LoadImg("Base//Run.png",g_screen);
+	p_player.Animation();
+
+
+
 
 	bool is_quit = false;
 	while (!is_quit)
@@ -85,12 +92,16 @@ int main(int argc, char* argv[])
 			{
 				is_quit = true;
 			}
+
+			p_player.HandleInputAction(g_event, g_screen);
 		}
 		SDL_SetRenderDrawColor(g_screen, 255, 255, 255, 255);
 		SDL_RenderClear(g_screen);
 
 		g_background3.Render(g_screen, NULL);
 		game_map.DrawMap(g_screen);
+
+		p_player.Show(g_screen);
 
 		SDL_RenderPresent(g_screen);
 	}

@@ -28,6 +28,16 @@ const int COLOR_KEY_B = 180;
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 10
 
+//cau truc du lieu di chuyen
+
+struct Input {
+	int left_;
+	int right_;
+	int up_;
+	int jump_;
+	int down_;
+};
+
 struct Map {
 	int start_x_;
 	int start_y_;
