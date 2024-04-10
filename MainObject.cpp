@@ -118,7 +118,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 		{
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
-			p_bullet->LoadImg("Base//Banana.png", Screen);
+			p_bullet->LoadImg("Base//Banana1.png", Screen);
 
 			//set vị trí phù hợp
 			p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.3);
@@ -163,9 +163,10 @@ void MainObject::DoPlayer(Map& map_data)
 	}
 	if (input_type_.jump_ == 1) {
 		if (on_ground == true) {
+			on_ground = false;
 			y_val_ =- JUMP_SPEED;
+			input_type_.jump_ = 0;
 		}
-		input_type_.jump_ == 0;
 	}
 	Checkmap(map_data);
 	CenterEntityOnMap(map_data);// tính toán ra thông số của bản đồ

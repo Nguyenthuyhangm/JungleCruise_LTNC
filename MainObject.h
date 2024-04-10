@@ -3,7 +3,7 @@
 #define GRAVITY 1.5;
 #define MAX_FALL_SPEED 12;
 #define PLAYER_SPEED 10;
-#define JUMP_SPEED 13;
+#define JUMP_SPEED 20;
 
 #include "CommonFunction.h"
 #include "BaseObject.h"
