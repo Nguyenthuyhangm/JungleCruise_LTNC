@@ -1,4 +1,4 @@
-﻿#ifndef BASE_OBJECT_H_
+﻿ #ifndef BASE_OBJECT_H_
 #define  BASE_OBJECT_H_
 #include "CommonFunction.h"
 

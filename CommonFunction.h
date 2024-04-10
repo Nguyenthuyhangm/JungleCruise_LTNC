@@ -14,6 +14,7 @@ static SDL_Renderer* g_screen = nullptr;
 static SDL_Event g_event;
 
 //Define Screen
+const int FRAME_PER_SECOND = 30;// chất lượng hình ảnh -> số frame trong 1s
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 640;
 const int SCREEN_BPP = 32;

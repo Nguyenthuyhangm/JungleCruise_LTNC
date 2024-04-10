@@ -17,6 +17,9 @@ MainObject::MainObject()
 	input_type_.down_ = 0;
 	input_type_.up_ = 0;
 	bool on_ground = false;
+	map_x_ = 0;
+	map_y_ = 0;
+
 }
 MainObject::~MainObject()
 {
@@ -48,15 +51,8 @@ void MainObject::Animation()
 
 void MainObject::Show(SDL_Renderer* des)
 {
-	if (status_ == WALK_RIGTH)//ktra trạng thái
-	{
-		LoadImg("Base//Run.png", des);
-	}
-	if (input_type_.jump_ ==1)//ktra trạng thái
-	{
-		LoadImg("Base//Jump.png", des);
-	}
-	if (input_type_.right_ == 1) {
+	UpdateImagePlayer(des);
+	if (input_type_.right_ == 1||input_type_.jump_==1) {
 		frame_++;//di chuyển
 	}
 	else {
@@ -65,8 +61,8 @@ void MainObject::Show(SDL_Renderer* des)
 	if (frame_ >= 8) {
 		frame_ = 0;//set dd
 	}
-	rect_.x = x_pos_;
-	rect_.y = y_pos_;
+	rect_.x = x_pos_- map_x_;// tính từ điểm mốc ban đầu đến điểm map hiện tại 
+	rect_.y = y_pos_- map_y_;
 
 	SDL_Rect* current_clip = &frame_clip_[frame_];//lấy frame hiện tại
 
@@ -90,6 +86,8 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 		case SDLK_UP:
 		{
 			input_type_.jump_ = 1;
+			UpdateImagePlayer(Screen);
+			
 		}
 		break;
 		default:
@@ -114,38 +112,85 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			break;
 		}
 	} 
-	/*if (events.type == SDL_MOUSEBUTTONDOWN)
+	if (events.type == SDL_MOUSEBUTTONDOWN)
 	{
-		if (events.button.button == SDL_BUTTON_RIGHT)
+		if (events.button.button ==SDL_BUTTON_LEFT)
 		{
-			input_type_.jump_ = 1;
+			//tạo viên đạn mới
+			BulletObject* p_bullet = new BulletObject();
+			p_bullet->LoadImg("Base//Banana.png", Screen);
+
+			//set vị trí phù hợp
+			p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.3);
+			p_bullet->Set_x_val(20);// tốc độ di chuyển của viên đạn
+			p_bullet->set_is_move(true);
+
+			p_bullet_list.push_back(p_bullet);
+
 		}
-	}*/
+	}
+}
+void MainObject::HandleBullet(SDL_Renderer* des) {// gọi liên tục dderr bắn
+	for (int i = 0; i < p_bullet_list.size(); i++) {
+		BulletObject* p_bullet = p_bullet_list.at(i);
+		if (p_bullet != NULL) {
+			if (p_bullet->get_is_move() == true) {
+				p_bullet->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT);
+				p_bullet->Render(des);//show lên màn hình
+			}
+			else {
+				p_bullet_list.erase(p_bullet_list.begin() + i);
+				if (p_bullet != NULL) {
+					delete p_bullet;
+					p_bullet = NULL;
+				}
+			}
+		}
+	}
 }
 
 void MainObject::DoPlayer(Map& map_data)
 {
 	x_val_ = 0;
-	y_val_ += 0.8;//rơi từ từ xuống 
+	y_val_ += GRAVITY;//rơi từ từ xuống 
 
 	//giới hạn tốc độ rơi 
-	if (y_val_ >= 10) {
-		y_val_ = 10;
+	if (y_val_ >= 12) {
+		y_val_ = 12;
 	}
-	if (input_type_.right_ == 1) {
+	if (input_type_.right_ == 1){
 		x_val_ += PLAYER_SPEED;
 	}
 	if (input_type_.jump_ == 1) {
 		if (on_ground == true) {
-
-			y_val_ = JUMP_SPEED;
+			y_val_ =- JUMP_SPEED;
 		}
-
-			input_type_.jump_ = 0;
+		input_type_.jump_ == 0;
 	}
 	Checkmap(map_data);
+	CenterEntityOnMap(map_data);// tính toán ra thông số của bản đồ
 }
+void MainObject::CenterEntityOnMap(Map& map_data)
+{
+	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 2);//lượng mà nhân vật di chuyển và bản đồ đc cuốn theo
+	if (map_data.start_x_ < 0){// khi lùi dần thì k cho phép bản đồ lùi thêm nữa 
+		map_data.start_x_ = 0;
+	}
+	else if (map_data.start_x_ + SCREEN_WIDTH >= map_data.max_x_)//bằng đúng chiều dài tối đa của bản đồ -> k cho bản đồ di chuyển thêm
+	{
+		map_data.start_x_ = map_data.max_x_ - SCREEN_WIDTH;
+	}
 
+	map_data.start_y_ = y_pos_ - (SCREEN_HEIGHT/ 2);
+	if (map_data.start_y_ < 0)
+	{
+		map_data.start_y_ = 0;
+	}
+	else if (map_data.start_y_ + SCREEN_HEIGHT >= map_data.max_y_)
+	{
+		map_data.start_y_ = map_data.max_y_ - SCREEN_HEIGHT;
+	}
+}
 
 // kiểm tra xem map và nhân vật có va chạm hay không ? 
 void MainObject::Checkmap(Map& map_data)
@@ -170,11 +215,11 @@ void MainObject::Checkmap(Map& map_data)
 		if (x_val_ > 0)//main object đang di chuyển sang phải
 		{
 			//kiểm tra xem map data có phải ô trống không
-			if (map_data.tile[y1][x2] != 0 || map_data.tile[y2][x2] != 0)
+			if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
 			{
 				x_pos_ = x2 * TILE_SIZE;
 				x_pos_ -= width_frame_ + 1;
-				x_val_ = 0;// va chạm rồi vẫn đứng im 
+				x_val_ = 0;// va chạm rồi vẫn đứng im
 
 			}
 		}
@@ -200,7 +245,7 @@ void MainObject::Checkmap(Map& map_data)
 	{
 		if (y_val_ > 0)
 		{
-			if (map_data.tile[y2][x1] != 0 || map_data.tile[y2][x2] != 0)
+			if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
 			{
 				y_pos_ = y2 * TILE_SIZE;
 				y_pos_ -= (height_frame_ + 1);
@@ -224,4 +269,11 @@ void MainObject::Checkmap(Map& map_data)
 		x_pos_ = map_data.max_x_ - width_frame_-1;
 	}
 
+}
+
+void MainObject::UpdateImagePlayer(SDL_Renderer* des) {
+	if (on_ground == true) {
+		if(status_==WALK_RIGTH)
+		LoadImg("Base//Run.png",des);
+	}
 }

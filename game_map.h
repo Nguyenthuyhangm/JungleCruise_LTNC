@@ -29,6 +29,7 @@ public:
 	Map getMap()const {
 		return game_map_;
 	};
+	void Setmap(Map& map_data) { game_map_ = map_data; };
 private:
 	Map game_map_;
 	TileMap tile_map[20];
