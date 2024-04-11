@@ -3,6 +3,9 @@
 #include"game_map.h"
 #include"MainObject.h"
 #include"ImpTimer.h"
+#include"ThreatsObject.h"
+
+using namespace std;
 
 BaseObject g_background3;
 
@@ -62,6 +65,25 @@ bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay khôn
 	return true;
 }
 
+vector<ThreatsObject*>MakeThreadsList()
+{
+	vector<ThreatsObject*>list_threats;
+	ThreatsObject* threats_objs = new ThreatsObject[20];
+	for (int i = 0; i < 20; i++) {
+		ThreatsObject* p_threat = (threats_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Quai/dung1.png", g_screen);
+			p_threat->setclip();
+			p_threat->set_x_pos(700 + i * 1200);
+			p_threat->set_y_pos(250);
+
+			list_threats.push_back(p_threat);
+
+		}
+	}
+	return list_threats;
+}
+
 int main(int argc, char* argv[])
 {
 	ImpTimer fps_timer;
@@ -83,6 +105,7 @@ int main(int argc, char* argv[])
 	p_player.LoadImg("Base//Run.png",g_screen);
 	p_player.Animation();
 	
+
 
 	bool is_quit = false;
 	while (!is_quit)
@@ -108,6 +131,7 @@ int main(int argc, char* argv[])
 		p_player.DoPlayer(map_data);
 		p_player.Show(g_screen);
 		p_player.HandleBullet(g_screen);
+
 
 		game_map.Setmap(map_data);
 		game_map.DrawMap(g_screen);

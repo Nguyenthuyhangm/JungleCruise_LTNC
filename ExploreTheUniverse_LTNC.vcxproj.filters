@@ -56,7 +56,7 @@
     <ClInclude Include="BulletObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ThreatObject.h">
+    <ClInclude Include="Threats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
