@@ -1,6 +1,6 @@
 ﻿#ifndef THREATS_OBJECT_H_
 #define THREATS_OBJECT_H_
-#define THREAT_FRAME_NUM 8
+#define THREAT_FRAME_NUM 5
 #define THREAT_GRAVITY 0.8
 #define MAX_FALL_SPEED 10;
 

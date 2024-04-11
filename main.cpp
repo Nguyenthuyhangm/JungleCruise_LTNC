@@ -74,7 +74,7 @@ vector<ThreatsObject*>MakeThreadsList()
 		if (p_threat != NULL) {
 			p_threat->LoadImg("Quai/dung1.png", g_screen);
 			p_threat->setclip();
-			p_threat->set_x_pos(700 + i * 1200);
+			p_threat->set_x_pos(500 + i * 1200);
 			p_threat->set_y_pos(250);
 
 			list_threats.push_back(p_threat);
@@ -131,10 +131,21 @@ int main(int argc, char* argv[])
 		p_player.DoPlayer(map_data);
 		p_player.Show(g_screen);
 		p_player.HandleBullet(g_screen);
+		p_player.Animation();
 
+		vector<ThreatsObject*>threats_list = MakeThreadsList();
 
 		game_map.Setmap(map_data);
 		game_map.DrawMap(g_screen);
+
+		for (int i = 0; i < threats_list.size(); i++) {
+			ThreatsObject* p_threat = threats_list.at(i);
+			if (p_threat != NULL) {
+				p_threat->setmapXY(map_data.start_x_, map_data.start_y_);
+				p_threat->DoPlayer(map_data);
+				p_threat->Show(g_screen);
+			}
+		}
 
 		SDL_RenderPresent(g_screen);
 

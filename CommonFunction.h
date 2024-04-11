@@ -8,7 +8,7 @@
 #include <SDL_image.h>
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
-#include<vector.h>
+#include<vector>
 
 static SDL_Window* g_window = nullptr;
 static SDL_Renderer* g_screen = nullptr;

@@ -3,10 +3,10 @@ using namespace std;
 ThreatsObject::ThreatsObject() {
 	width_frame = 0;
 	height_frame = 0;
-	x_val = 0;
-	y_val = 0;
-	x_pos = 0;
-	y_pos = 0;
+	x_val = 0.0;
+	y_val = 0.0;
+	x_pos = 0.0;
+	y_pos = 0.0;
 	on_ground = false;
 	come_back_time = 0;
 	frame_ = 0;
@@ -22,10 +22,12 @@ bool ThreatsObject::LoadImg(string path, SDL_Renderer* Screen) {
 		width_frame = rect_.w / THREAT_FRAME_NUM;
 		height_frame = rect_.h;
 	}
+	return ret;
 }
+
 void ThreatsObject::setclip() {
 	if (width_frame > 0 && height_frame > 0) {
-		for (int i = 0; i < 8; i++) {	//có 8 frame nên cho vòng l?p ch?y d?n 8 
+		for (int i = 0; i < 5; i++) {	//có 8 frame nên cho vòng l?p ch?y d?n 8 
 			frame_clip_[i].x = width_frame * i;
 			frame_clip_[i].y = 0;
 			frame_clip_[i].w = width_frame;
@@ -40,7 +42,7 @@ void ThreatsObject::Show(SDL_Renderer* des)
 		rect_.x = x_pos - map_x;
 		rect_.y = y_pos - map_y;
 		frame_++;
-		if (frame_ >= 8) {
+		if (frame_ >= 5) {
 			frame_ = 0;
 		}
 		SDL_Rect* currentClip = &frame_clip_[frame_];
