@@ -4,6 +4,7 @@
 #define MAX_FALL_SPEED 12;
 #define PLAYER_SPEED 10;
 #define JUMP_SPEED 20;
+#define FRUIT 4;
 
 #include "CommonFunction.h"
 #include "BaseObject.h"
