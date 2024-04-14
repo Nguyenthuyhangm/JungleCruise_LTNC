@@ -40,8 +40,10 @@ public:
 	}
 	vector<BulletObject*>get_bullet_list()const { return p_bullet_list; }
 	void HandleBullet(SDL_Renderer* des);
+	void IncreaseFruit();
 
 private:
+	int fruit_count;// số lượng tiền ăn được ban đầu
 	vector<BulletObject*> p_bullet_list;// băng đạn 
 	float x_val_;
 	float y_val_;

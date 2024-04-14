@@ -19,6 +19,7 @@ MainObject::MainObject()
 	bool on_ground = false;
 	map_x_ = 0;
 	map_y_ = 0;
+	fruit_count = 0;
 
 }
 MainObject::~MainObject()
@@ -216,17 +217,33 @@ void MainObject::Checkmap(Map& map_data)
 	{
 		if (x_val_ > 0)//main object đang di chuyển sang phải
 		{
+			int val1 = map_data.tile[y1][x2];
+			int val2 = map_data.tile[y2][x2]; 
+			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+				map_data.tile[y1][x2] = 0;// cho chạm vào xong biến mất
+				map_data.tile[y2][x2] = 0;
+				IncreaseFruit();
+			}
 			//kiểm tra xem map data có phải ô trống không
-			if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-			{
-				x_pos_ = x2 * TILE_SIZE;
-				x_pos_ -= width_frame_ + 1;
-				x_val_ = 0;// va chạm rồi vẫn đứng im
+			else{
+				if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+				{
+					x_pos_ = x2 * TILE_SIZE;
+					x_pos_ -= width_frame_ + 1;
+					x_val_ = 0;// va chạm rồi vẫn đứng im
 
+				}
 			}
 		}
 		else if (x_val_ < 0)
 		{
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y2][x1];
+			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+				map_data.tile[y1][x1] = 0;// cho chạm vào xong biến mất
+				map_data.tile[y2][x1] = 0;
+				IncreaseFruit();
+			}
 			if (map_data.tile[y1][x1] != 0 || map_data.tile[y2][x1] != 0)
 			{
 				x_pos_ = (x1 + 1) * TILE_SIZE;
@@ -247,21 +264,40 @@ void MainObject::Checkmap(Map& map_data)
 	{
 		if (y_val_ > 0)
 		{
-			if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-			{
-				y_pos_ = y2 * TILE_SIZE;
-				y_pos_ -= (height_frame_ + 1);
-				y_val_ = 0;
-				on_ground = true;//đang ở trên mặt đất
+			int val1 = map_data.tile[y2][x1];
+			int val2 = map_data.tile[y2][x2];
+			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				IncreaseFruit();
+			}
+			else {
+				if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+				{
+					y_pos_ = y2 * TILE_SIZE;
+					y_pos_ -= (height_frame_ + 1);
+					y_val_ = 0;
+					on_ground = true;//đang ở trên mặt đất
+				}
 			}
 		}
 		else if (y_val_ < 0)
 		{
-			if (map_data.tile[y1][x1] != 0 || map_data.tile[y1][x2] != 0)
-			{
-				y_pos_ = (y1 + 1) * TILE_SIZE;
-				y_val_ = 0;
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y1][x2];
+			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y1][x2] = 0;
+				IncreaseFruit();
 			}
+			else{
+				if (map_data.tile[y1][x1] != 0 || map_data.tile[y1][x2] != 0)
+				{
+					y_pos_ = (y1 + 1) * TILE_SIZE;
+					y_val_ = 0;
+				}
+			}
+
 		}
 	}
 	x_pos_ += x_val_;
@@ -271,6 +307,9 @@ void MainObject::Checkmap(Map& map_data)
 		x_pos_ = map_data.max_x_ - width_frame_-1;
 	}
 
+}
+void MainObject::IncreaseFruit() {
+	fruit_count++;
 }
 
 void MainObject::UpdateImagePlayer(SDL_Renderer* des) {

@@ -42,7 +42,7 @@ void ThreatsObject::Show(SDL_Renderer* des)
 		rect_.x = x_pos - map_x;
 		rect_.y = y_pos - map_y;
 		frame_++;
-		if (frame_ >= 5) {
+		if (frame_ > 5) {
 			frame_ = 0;
 		}
 		SDL_Rect* currentClip = &frame_clip_[frame_];
