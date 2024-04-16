@@ -119,7 +119,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 		{
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
-			p_bullet->LoadImg("Base//Banana.png", Screen);
+			p_bullet->LoadImg("Base//Banana1.png", Screen);
 			Animation();
 
 			//set vị trí phù hợp

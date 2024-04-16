@@ -72,9 +72,9 @@ vector<ThreatsObject*>MakeThreadsList()
 	for (int i = 0; i < 20; i++) {
 		ThreatsObject* p_threat = (threats_objs + i);
 		if (p_threat != NULL) {
-			p_threat->LoadImg("Quai/dung1.png", g_screen);
+			p_threat->LoadImg("Base//Bee.png", g_screen);
 			p_threat->setclip();
-			p_threat->set_x_pos(500 + i * 1200);
+			p_threat->set_x_pos(700 + i * 1000);
 			p_threat->set_y_pos(250);
 
 			list_threats.push_back(p_threat);
