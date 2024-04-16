@@ -20,7 +20,7 @@ MainObject::MainObject()
 	map_x_ = 0;
 	map_y_ = 0;
 	fruit_count = 0;
-
+	come_back_time = 0;
 }
 MainObject::~MainObject()
 {
@@ -153,26 +153,44 @@ void MainObject::HandleBullet(SDL_Renderer* des) {// gọi liên tục dderr b�
 
 void MainObject::DoPlayer(Map& map_data)
 {
-	x_val_ = 0;
-	y_val_ += GRAVITY;//rơi từ từ xuống 
+	if (come_back_time == 0) {
+		x_val_ = 0;
+		y_val_ += GRAVITY;//rơi từ từ xuống 
 
-	//giới hạn tốc độ rơi 
-	if (y_val_ >= 12) {
-		y_val_ = 12;
+		//giới hạn tốc độ rơi 
+		if (y_val_ >= 12) {
+			y_val_ = 12;
+		}
+		if (input_type_.right_ == 1) {
+			x_val_ += PLAYER_SPEED;
+		}
+		if (input_type_.jump_ == 1) {
+			if (on_ground == true) {
+				on_ground = false;
+				y_val_ = -JUMP_SPEED;
+				input_type_.jump_ = 0;
+			}
+		}
+		Checkmap(map_data);
+		CenterEntityOnMap(map_data);// tính toán ra thông số của bản đồ
 	}
-	if (input_type_.right_ == 1){
-		x_val_ += PLAYER_SPEED;
-	}
-	if (input_type_.jump_ == 1) {
-		if (on_ground == true) {
-			on_ground = false;
-			y_val_ =- JUMP_SPEED;
-			input_type_.jump_ = 0;
+	if (come_back_time > 0) {
+		come_back_time--;
+		if (come_back_time == 0) {
+			if (x_pos_ > 256) {
+				x_pos_ -= 256;
+				map_x_ = -256;
+			}
+			else {
+				x_pos_ = 0;
+			}
+			y_pos_ = 0;
+			x_val_ = 0;
+			y_val_ = 0;
 		}
 	}
-	Checkmap(map_data);
-	CenterEntityOnMap(map_data);// tính toán ra thông số của bản đồ
 }
+
 void MainObject::CenterEntityOnMap(Map& map_data)
 {
 	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 2);//lượng mà nhân vật di chuyển và bản đồ đc cuốn theo
@@ -302,11 +320,15 @@ void MainObject::Checkmap(Map& map_data)
 	}
 	x_pos_ += x_val_;
 	y_pos_ += y_val_;// chạy bth
-
+	if (x_pos_ < 0) {
+		x_pos_ = 0;
+	}
 	if (x_pos_ + width_frame_ > map_data.max_x_) {
 		x_pos_ = map_data.max_x_ - width_frame_-1;
 	}
-
+	if (y_pos_ > map_data.max_y_) {
+		come_back_time = 60;
+	}
 }
 void MainObject::IncreaseFruit() {
 	fruit_count++;

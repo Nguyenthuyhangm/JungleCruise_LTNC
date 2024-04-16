@@ -4,7 +4,7 @@
 #define MAX_FALL_SPEED 12;
 #define PLAYER_SPEED 10;
 #define JUMP_SPEED 20;
-#define FRUIT 11;
+
 
 #include "CommonFunction.h"
 #include "BaseObject.h"
@@ -63,5 +63,7 @@ private:
 
 	int map_x_;
 	int map_y_;
+
+	int come_back_time;//thoi gian quay tro lai
 };
 #endif
