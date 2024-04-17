@@ -5,6 +5,7 @@
 #include"ImpTimer.h"
 #include"ThreatsObject.h"
 
+
 using namespace std;
 
 BaseObject g_background3;
@@ -73,7 +74,7 @@ vector<ThreatsObject*>MakeThreadsList()
 		ThreatsObject* p_threat = (threats_objs + i);
 		if (p_threat != NULL) {
 			p_threat->LoadImg("Base//Bee.png", g_screen);
-			p_threat->setclip();
+			p_threat->set_clip();
 			p_threat->set_x_pos(700 + i * 1000);
 			p_threat->set_y_pos(250);
 
@@ -141,7 +142,7 @@ int main(int argc, char* argv[])
 		for (int i = 0; i < threats_list.size(); i++) {
 			ThreatsObject* p_threat = threats_list.at(i);
 			if (p_threat != NULL) {
-				p_threat->setmapXY(map_data.start_x_, map_data.start_y_);
+				p_threat->setmap(map_data.start_x_, map_data.start_y_);
 				p_threat->DoPlayer(map_data);
 				p_threat->Show(g_screen);
 			}
