@@ -17,6 +17,7 @@ public:
     SDL_Texture* GetObject() const { return p_object_; }
 
     bool LoadImg(std::string path, SDL_Renderer* screen);
+    bool LoadImg1(std::string path, SDL_Renderer* screen);
     void Render(SDL_Renderer* des, const SDL_Rect* clip = nullptr);
     void Free();//hàm giải phóng đối tượng
 protected:

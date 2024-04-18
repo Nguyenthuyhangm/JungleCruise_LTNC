@@ -38,6 +38,7 @@ struct Input {
 	int up_;
 	int jump_;
 	int down_;
+	int left_;
 };
 
 struct Map {

@@ -25,6 +25,7 @@ public:
 	};
 
 	bool LoadImg(std::string path, SDL_Renderer* Screen);
+	bool LoadImg1(std::string path, SDL_Renderer* Screen);
 	void Show(SDL_Renderer* des);//Show Frame; 
 	void HandleInputAction(SDL_Event events, SDL_Renderer* Screen);
 	void Animation();//chuyên xử lý hiệu ứng, animation

@@ -16,6 +16,8 @@ MainObject::MainObject()
 	input_type_.jump_ = 0;
 	input_type_.down_ = 0;
 	input_type_.up_ = 0;
+	input_type_.left_ = 0;
+
 	bool on_ground = false;
 	map_x_ = 0;
 	map_y_ = 0;
@@ -37,6 +39,16 @@ bool MainObject::LoadImg(string path, SDL_Renderer* Screen)
 	}
 	return ret;
 }
+bool MainObject::LoadImg1(string path, SDL_Renderer* Screen)
+{
+	bool ret = BaseObject::LoadImg1(path, Screen);
+	if (ret == true)
+	{
+		width_frame_ = rect_.w / 4;
+		height_frame_ = rect_.h;
+	}
+	return ret;
+}
 void MainObject::Animation()
 {
 	if (width_frame_ > 0 && height_frame_ > 0)//tọa độ của frame ->set clip
@@ -48,12 +60,12 @@ void MainObject::Animation()
 			frame_clip_[i].h = height_frame_;
 		}
 	}
-}
+}  
 
 void MainObject::Show(SDL_Renderer* des)
 {
 	UpdateImagePlayer(des);
-	if (input_type_.right_ == 1||input_type_.jump_==1) {
+	if (input_type_.right_ == 1||input_type_.left_==1||input_type_.jump_) {
 		frame_++;//di chuyển
 	}
 	else {
@@ -84,6 +96,12 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			input_type_.right_ = 1;
 		}
 		break;
+		case SDLK_LEFT:
+		{
+			status_ = WALK_LEFT;
+			input_type_.left_ = 1;
+		}
+		break;
 		case SDLK_UP:
 		{
 			input_type_.jump_ = 1;
@@ -104,6 +122,11 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			input_type_.right_ = 0;
 		}
 		break;
+		case SDLK_LEFT:
+		{
+			input_type_.left_ = 0;
+		}
+		break;
 		case SDLK_UP:
 		{
 			input_type_.jump_ = 0;
@@ -120,6 +143,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->LoadImg("Base//Banana1.png", Screen);
+			frame_++;
 			Animation();
 
 			//set vị trí phù hợp
@@ -163,6 +187,9 @@ void MainObject::DoPlayer(Map& map_data)
 		}
 		if (input_type_.right_ == 1) {
 			x_val_ += PLAYER_SPEED;
+		}
+		if (input_type_.left_ == 1) {
+			x_val_ -= PLAYER_SPEED;
 		}
 		if (input_type_.jump_ == 1) {
 			if (on_ground == true) {
@@ -338,5 +365,11 @@ void MainObject::UpdateImagePlayer(SDL_Renderer* des) {
 	if (on_ground == true) {
 		if(status_==WALK_RIGTH)
 		LoadImg("Base//Run.png",des);
+		if (status_ == WALK_LEFT) {
+			LoadImg("Base//Run1.png", des);
+		}
+	}
+	else {
+		LoadImg("Base//Jump.png", des);
 	}
 }

@@ -11,6 +11,11 @@ ThreatsObject::ThreatsObject() {
 	comeback_time = 0;
 	frame_ = 0;
 
+	animation_a_ = 0;
+	animation_b_ = 0;
+	input_type_.left_ = 1;
+	type_move_ = 0;
+
 }
 ThreatsObject::~ThreatsObject() {
 
