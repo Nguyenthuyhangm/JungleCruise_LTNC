@@ -30,6 +30,7 @@ const int COLOR_KEY_B = 180;
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 10
 #define STAFF_FRUIT 11
+#define LACAY 4
 
 //cau truc du lieu di chuyen
 

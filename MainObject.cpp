@@ -39,16 +39,6 @@ bool MainObject::LoadImg(string path, SDL_Renderer* Screen)
 	}
 	return ret;
 }
-bool MainObject::LoadImg1(string path, SDL_Renderer* Screen)
-{
-	bool ret = BaseObject::LoadImg1(path, Screen);
-	if (ret == true)
-	{
-		width_frame_ = rect_.w / 4;
-		height_frame_ = rect_.h;
-	}
-	return ret;
-}
 void MainObject::Animation()
 {
 	if (width_frame_ > 0 && height_frame_ > 0)//tọa độ của frame ->set clip
@@ -269,6 +259,11 @@ void MainObject::Checkmap(Map& map_data)
 				map_data.tile[y2][x2] = 0;
 				IncreaseFruit();
 			}
+			if (val1 == LACAY || val2 == LACAY) {
+				map_data.tile[y1][x2] = 0;// cho chạm vào xong biến mất
+				map_data.tile[y2][x2] = 0;
+			}
+
 			//kiểm tra xem map data có phải ô trống không
 			else{
 				if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
@@ -288,6 +283,10 @@ void MainObject::Checkmap(Map& map_data)
 				map_data.tile[y1][x1] = 0;// cho chạm vào xong biến mất
 				map_data.tile[y2][x1] = 0;
 				IncreaseFruit();
+			}
+			if (val1 == LACAY || val2 == LACAY) {
+				map_data.tile[y1][x1] = 0;// cho chạm vào xong biến mất
+				map_data.tile[y2][x1] = 0;
 			}
 			if (map_data.tile[y1][x1] != 0 || map_data.tile[y2][x1] != 0)
 			{
@@ -316,6 +315,10 @@ void MainObject::Checkmap(Map& map_data)
 				map_data.tile[y2][x2] = 0;
 				IncreaseFruit();
 			}
+			if (val1 == LACAY || val2 == LACAY) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+			}
 			else {
 				if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
 				{
@@ -334,6 +337,10 @@ void MainObject::Checkmap(Map& map_data)
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
 				IncreaseFruit();
+			}
+			if (val1 == LACAY || val2 == LACAY) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y1][x2] = 0;
 			}
 			else{
 				if (map_data.tile[y1][x1] != 0 || map_data.tile[y1][x2] != 0)
@@ -369,7 +376,5 @@ void MainObject::UpdateImagePlayer(SDL_Renderer* des) {
 			LoadImg("Base//Run1.png", des);
 		}
 	}
-	else {
-		LoadImg("Base//Jump.png", des);
-	}
+	
 }
