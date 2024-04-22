@@ -34,7 +34,7 @@ bool ThreatsObject::LoadImg(std::string path, SDL_Renderer* screen) {
 
 void ThreatsObject::set_clips() {
     if (width_frame_ > 0 && height_frame_ > 0) {
-        for (int i = 0; i < 8; i++) {	//có 8 frame nên cho vòng lặp chạy đến 8 
+        for (int i = 0; i < 8; i++) {	//có 8 frame nên cho vòng lặp chạy đến 8
             frame_clip_[i].x = width_frame_ * i;
             frame_clip_[i].y = 0;
             frame_clip_[i].w = width_frame_;
@@ -83,7 +83,7 @@ void ThreatsObject::InitThreats() {
     y_val_ = 0;
     if (x_pos_ > 256) {
         x_pos_ -= 256;
-        //Trừ cả khoảng luôn 
+        //Trừ cả khoảng luôn
         animation_a_ -= 256;
         animation_b_ -= 256;
     }
@@ -110,7 +110,7 @@ void ThreatsObject::CheckToMap(Map& map_data) {
     x2 = (x_pos_ + x_val_ + width_frame_ - 1) / TILE_SIZE;
 
 
-    //Xác định ô đầu cuối mà nhân vật đang đứng 
+    //Xác định ô đầu cuối mà nhân vật đang đứng
     y1 = (y_pos_) / TILE_SIZE;
     y2 = (y_pos_ + height_min - 1) / TILE_SIZE;
 
@@ -142,7 +142,7 @@ void ThreatsObject::CheckToMap(Map& map_data) {
         else if (x_val_ < 0) {
             int val1 = map_data.tile[y1][x1];
             int val2 = map_data.tile[y2][x1];
-            //Nếu ăn phải tiền thì ô tiền biến mất
+            //Nếu ăn phải quả thì ô quả biến mất
             if (((val1 >= 1 && val1 <= 18) && val1 != STAFF_FRUIT||LACAY) || ((val2 >= 1 && val2 <= 18) && val2 != STAFF_FRUIT||LACAY)) {
                 //Lùi chạm đá thì giữ vị trí, x_val_ = 0 luôn
                 x_pos_ = (x1 + 1) * TILE_SIZE;
@@ -167,7 +167,7 @@ void ThreatsObject::CheckToMap(Map& map_data) {
             int val2 = map_data.tile[y2][x2];
             if (((val1 >= 1 && val1 <= 18) && val1 != STAFF_FRUIT||LACAY) || ((val2 >= 1 && val2 <= 18) && val2 != STAFF_FRUIT||LACAY)) {
                 y_pos_ = y2 * TILE_SIZE;
-                y_pos_ -= (height_frame_ + 1);
+                //y_pos_ -= (height_frame_ + 1);
                 y_val_ = 0;
                 on_ground_ = true;
             }

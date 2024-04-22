@@ -44,7 +44,7 @@ bool  InitData()
 // Đóng cửa sổ
 void close()
 {
-	g_background3.Free();//Giải phóng bộ nhớ 
+	g_background3.Free();//Giải phóng bộ nhớ
 
 	SDL_DestroyRenderer(g_screen);
 	g_screen = NULL;
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
 
 	GameMap game_map;
 	//fill ảnh đất
-	//Đọc map viết bởi số 0 1 2 
+	//Đọc map viết bởi số 0 1 2
 	char file_path[] = "map01.dat";
 	game_map.LoadMap(file_path);
 	//Load các hình ảnh tương ứng vào ô 1 2 3
@@ -130,13 +130,14 @@ int main(int argc, char* argv[])
 	MainObject p_player;
 	p_player.LoadImg("Base//Run.png",g_screen);
 	p_player.Animation();
-	
 
+
+    vector<ThreatsObject*>threats_list = MakeThreadsList();
 
 	bool is_quit = false;
 	while (!is_quit)
 	{
-		fps_timer.Start();//// khi bắt đầu vòng while chạy bắt đầu start để tính tgian chạy 
+		fps_timer.Start();//// khi bắt đầu vòng while chạy bắt đầu start để tính tgian chạy
 		while (SDL_PollEvent(&g_event) != 0)
 		{
 			if (g_event.type == SDL_QUIT)
@@ -150,7 +151,7 @@ int main(int argc, char* argv[])
 		SDL_RenderClear(g_screen);
 
 		g_background3.Render(g_screen, NULL);
-	
+
 		Map map_data = game_map.getMap();
 
 		p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
@@ -158,8 +159,6 @@ int main(int argc, char* argv[])
 		p_player.Show(g_screen);
 		p_player.HandleBullet(g_screen);
 		p_player.Animation();
-
-		vector<ThreatsObject*>threats_list = MakeThreadsList();
 
 		game_map.Setmap(map_data);
 		game_map.DrawMap(g_screen);
