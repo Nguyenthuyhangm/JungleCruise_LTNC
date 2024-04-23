@@ -83,7 +83,9 @@ vector<ThreatsObject*>MakeThreadsList()
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
 			p_threat->set_input_left(1);
 			list_threats.push_back(p_threat);
-
+            BulletObject* p_bullet=new BulletObject();
+            p_threat->InitBullet(p_bullet,g_screen);
+            list_threats.push_back(p_threat);
 		}
 	}
     ThreatsObject* threats_objs = new ThreatsObject[20];
@@ -190,6 +192,7 @@ int main(int argc, char* argv[])
 				p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
 				p_threat->ImpMoveType(g_screen);
 				p_threat->DoPlayer(map_data);
+				p_threat->MakeBullet(g_screen,SCREEN_HEIGHT,SCREEN_WIDTH);
 				p_threat->Show(g_screen);
 			}
 		}

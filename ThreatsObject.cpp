@@ -231,11 +231,39 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen) {
             }
         }
     }
-SDL_Rect ThreatsObject::GetRectFrame() {
-    SDL_Rect rect;
-    rect.x = rect_.x;
-    rect.y = rect_.y;
-    rect.w = width_frame_;
-    rect.h = height_frame_;
-    return rect;
+void ThreatsObject::InitBullet(BulletObject* p_bullet,SDL_Renderer* Screen){
+    if(p_bullet!=NULL){
+        p_bullet->set_bullet_type(BulletObject::COMMON_BULLET);
+        p_bullet->LoadImgBullet(Screen);
+        p_bullet->set_is_move(true);
+        p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
+        p_bullet->SetRect(rect_.x+5,y_pos_+10);
+        p_bullet-> Set_x_val(15);
+        bullet_list_.push_back(p_bullet);
+    }
 }
+void ThreatsObject::MakeBullet(SDL_Renderer* Screen,const int& x_limit,const int&y_limit){
+    for(int i=0;i<bullet_list_.size();i++){
+        BulletObject* p_bullet=bullet_list_.at(i);
+        if(p_bullet!=NULL){
+            if(p_bullet->get_is_move()){
+                int bullet_distance=rect_.x+width_frame_-p_bullet->GetRect().x;//trừ có thể ra 10 -> ktra thêm trường hợp
+                if(bullet_distance<300&&bullet_distance>0){
+                    p_bullet->HandleMove(x_limit,y_limit);
+                    p_bullet->Render(Screen);
+                }
+                else{
+                    p_bullet->set_is_move(false);
+                }
+            }
+            else{
+                p_bullet->set_is_move(true);
+                p_bullet-> SetRect(rect_.x+5,y_pos_+10);
+            }
+        }
+    }
+}
+//x_pos là chỉ số ứng với toàn bộ bản đồ
+//rect là vị trí của threat trong màn hình
+
+

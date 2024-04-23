@@ -8,6 +8,7 @@
 #define THREAT_FRAME_NUM 8
 #define THREAT_GRAVITY_SPEED 0.8
 #define THREAT_SPEED 3
+
 class ThreatsObject : public BaseObject
 {
 public:
@@ -50,6 +51,9 @@ public:
 
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void set_bullet_list(const std::vector<BulletObject*>& bl_list) { bullet_list_ = bl_list; }
+    void InitBullet(BulletObject* p_bullet,SDL_Renderer* Screen);
+    void MakeBullet(SDL_Renderer* Screen, const int& x_limit,const int& y_limit);
+
 private:
     //Giới hạn x y của bản đồ
     int map_x_;
@@ -76,6 +80,7 @@ private:
 
     //Vector chứa đạn của qúai
     std::vector<BulletObject*> bullet_list_;
+
 
 };
 
