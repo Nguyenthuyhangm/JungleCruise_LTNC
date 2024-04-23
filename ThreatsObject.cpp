@@ -4,7 +4,7 @@
 ThreatsObject::ThreatsObject() {
     width_frame_ = 0;
     height_frame_ = 0;
-    x_val_ = 2.0;
+    x_val_ = 0.0;
     y_val_ = 2.0;
     x_pos_ = 0.0;
     y_pos_ = 0.0;
@@ -43,7 +43,6 @@ void ThreatsObject::set_clips() {
         }
     }
 }
-
 void ThreatsObject::Show(SDL_Renderer* des) {
         rect_.x = x_pos_ - map_x_;
         rect_.y = y_pos_ - map_y_;
@@ -221,27 +220,19 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen) {
 
                 input_type_.left_ = 1;
                 input_type_.right_ = 0;
-                LoadImg("Base//Run Rad1.png", screen);
+                LoadImg("Base//Thanlan.png", screen);
 
             }
             else if (x_pos_ > animation_a_) {
                 input_type_.right_ = 1;
                 input_type_.left_ = 0;
-                LoadImg("Base//Run Rad.png", screen);
+                LoadImg("Base//Thanlan.png", screen);
 
             }
         }
-
-        if (input_type_.left_ == 1) {
-            LoadImg("Base//Run Rad1.png", screen);
-        }
-        //Bổ sung
-        else if (input_type_.right_ == 1) {
-            LoadImg("Base//Run Rad.png", screen);
-        }
     }
 
-// }
+
 
 SDL_Rect ThreatsObject::GetRectFrame() {
     SDL_Rect rect;

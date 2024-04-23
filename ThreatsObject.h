@@ -29,6 +29,7 @@ public:
     //Set vị trí x y của quái
     void SetMapXY(const int& mp_x, const int& mp_y) { map_x_ = mp_x; map_y_ = mp_y; }
     void set_clips();
+     void set_clips1();
     bool LoadImg(std::string path, SDL_Renderer* screen);
     void Show(SDL_Renderer* des);
 
@@ -42,7 +43,7 @@ public:
     //Lấy vùng để quái đi
     void SetAnimationPos(const int& pos_a, const int& pos_b) { animation_a_ = pos_a; animation_b_ = pos_b; }
     //Nếu đến cực bên phải thì gọi hàm này để nó lấy hướng bên trái
-    //Nếu đến cực bên trái thì gán biến này = 0 
+    //Nếu đến cực bên trái thì gán biến này = 0
     void set_input_left(const int& ipleft) { input_type_.left_ = ipleft; };
 
     void ImpMoveType(SDL_Renderer* screen);

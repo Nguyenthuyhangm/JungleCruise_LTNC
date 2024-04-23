@@ -59,7 +59,7 @@ void close()
 
 bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay không
 {
-	bool ret = g_background3.LoadImg("background.png", g_screen);
+	bool ret = g_background3.LoadImg("background1.png", g_screen);
 	if (ret == false)
 		return false;
 
@@ -71,44 +71,71 @@ vector<ThreatsObject*>MakeThreadsList()
 	vector<ThreatsObject*>list_threats;
 
 
-	ThreatsObject* dynamic_threats = new ThreatsObject[20];
-	for (int i = 0; i < 20; i++) {
+	ThreatsObject* dynamic_threats = new ThreatsObject[10];
+	for (int i = 0; i < 10; i++) {
 		ThreatsObject* p_threat = dynamic_threats + i;
 		if (p_threat != NULL) {
-			p_threat->LoadImg("Base//Run Rad1.png", g_screen);
+			p_threat->LoadImg("Base//Thanlan.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_type_move(ThreatsObject::MOVE_IN_SPACE_THREAT);
-			p_threat->set_x_pos(500+ i*500);
-			p_threat->set_y_pos(450);
+			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+			p_threat->set_x_pos(700+ i*500);
+			p_threat->set_y_pos(500);
 
 			int pos1 = p_threat->get_x_pos() - 200;
 			int pos2 = p_threat->get_x_pos() + 200;
 			p_threat->SetAnimationPos(pos1,pos2);
-			p_threat->set_input_left(0);
+			p_threat->set_input_left(1);
 
 			list_threats.push_back(p_threat);
 		}
 	}
+    ThreatsObject* threats_objs = new ThreatsObject[10];
+        for (int i = 0; i < 10; i++) {
+            ThreatsObject* p_threat = (threats_objs + i);
+            if (p_threat != NULL) {
+                p_threat->LoadImg("Base//Bird.png", g_screen);
+                p_threat->set_clips();
+                p_threat->set_x_pos(500+ i*500);
+                p_threat->set_y_pos(100);
+                p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+                p_threat->set_input_left(1);
+                list_threats.push_back(p_threat);
+
+            }
+        }
 
 
-
-	ThreatsObject* threats_objs = new ThreatsObject[20];
-	for (int i = 0; i < 20; i++) {
-		ThreatsObject* p_threat = (threats_objs + i);
+	ThreatsObject* shoot_objs = new ThreatsObject[10];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (shoot_objs + i);
 		if (p_threat != NULL) {
-			p_threat->LoadImg("Base//Bee.png", g_screen);
+			p_threat->LoadImg("Base//Ban.png", g_screen);
 			p_threat->set_clips();
 			p_threat->set_x_pos(500+ i*500);
-			p_threat->set_y_pos(200);
+			p_threat->set_y_pos(500);
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
 			p_threat->set_input_left(0);
 			list_threats.push_back(p_threat);
 
 		}
 	}
-	return list_threats;
-}
+	ThreatsObject* roll_objs = new ThreatsObject[10];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (roll_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Base//Bee.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(400+ i*500);
+			p_threat->set_y_pos(200);
+            p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+            p_threat->set_input_left(0);
 
+			list_threats.push_back(p_threat);
+
+		}
+    }
+    return list_threats;
+}
 int main(int argc, char* argv[])
 {
 	ImpTimer fps_timer;
