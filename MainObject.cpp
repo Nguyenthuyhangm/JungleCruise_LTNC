@@ -129,11 +129,11 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 	}
 	if (events.type == SDL_MOUSEBUTTONDOWN)
 	{
-		if (events.button.button ==SDL_BUTTON_LEFT)
+		 if (events.button.button ==SDL_BUTTON_RIGHT)
 		{
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
-			p_bullet->set_bullet_type(BulletObject::SOFIA_BULLET);
+			p_bullet->set_bullet_type(BulletObject::COMMON_BULLET);
 			p_bullet->LoadImgBullet(Screen);
             if(status_==WALK_LEFT){
                 p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
@@ -154,31 +154,31 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			p_bullet_list.push_back(p_bullet);
 
 		}
-		else if (events.button.button ==SDL_BUTTON_RIGHT)
-		{
-			//tạo viên đạn mới
-			BulletObject* p_bullet = new BulletObject();
-			p_bullet->set_bullet_type(BulletObject::LASER_BULLET);
-			p_bullet->LoadImgBullet(Screen);
-            if(status_==WALK_LEFT){
-                p_bullet->set_bullet_dir(BulletObject::DIR_UP_LEFT);
-                p_bullet-> SetRect(this->rect_.x,rect_.y+height_frame_*0.3);
-
-            }
-            else{
-                p_bullet->set_bullet_dir(BulletObject::DIR_UP_RIGHT);
-                p_bullet-> SetRect(this->rect_.x+width_frame_-20,rect_.y+height_frame_*0.3);
-            }
-
-			//set vị trí phù hợp
-			p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.3);
-			p_bullet->Set_x_val(20);// tốc độ di chuyển của viên đạn
-			p_bullet->Set_y_val(20);
-			p_bullet->set_is_move(true);
-
-			p_bullet_list.push_back(p_bullet);
-
-		}
+//		else if (events.button.button ==SDL_BUTTON_RIGHT)
+//		{
+//			//tạo viên đạn mới
+//			BulletObject* p_bullet = new BulletObject();
+//			p_bullet->set_bullet_type(BulletObject::LASER_BULLET);
+//			p_bullet->LoadImgBullet(Screen);
+//            if(status_==WALK_LEFT){
+//                p_bullet->set_bullet_dir(BulletObject::DIR_UP_LEFT);
+//                p_bullet-> SetRect(this->rect_.x,rect_.y+height_frame_*0.3);
+//
+//            }
+//            else{
+//                p_bullet->set_bullet_dir(BulletObject::DIR_UP_RIGHT);
+//                p_bullet-> SetRect(this->rect_.x+width_frame_-20,rect_.y+height_frame_*0.3);
+//            }
+//
+//			//set vị trí phù hợp
+//			p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.3);
+//			p_bullet->Set_x_val(20);// tốc độ di chuyển của viên đạn
+//			p_bullet->Set_y_val(20);
+//			p_bullet->set_is_move(true);
+//
+//			p_bullet_list.push_back(p_bullet);
+//
+//		}
     }
 }
 void MainObject::HandleBullet(SDL_Renderer* des) {// gọi liên tục dderr bắn
@@ -425,6 +425,17 @@ void MainObject::Checkmap(Map& map_data)
 	if (y_pos_ > map_data.max_y_) {
 		come_back_time = 60;
 	}
+}
+void MainObject::RemoveBullet(const int& idx){
+    int size = p_bullet_list.size();
+    if(size>0&&idx<size){
+        BulletObject* p_bullet=p_bullet_list.at(idx);
+        p_bullet_list.erase(p_bullet_list.begin()+idx);
+        if(p_bullet){
+            delete p_bullet;
+            p_bullet = NULL;
+        }
+    }
 }
 void MainObject::IncreaseFruit() {
 	fruit_count++;

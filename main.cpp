@@ -217,6 +217,32 @@ int main(int argc, char* argv[])
 				p_threat->Show(g_screen);
 			}
 		}
+		//lấy danh sách các viên đạn của threats
+		vector<BulletObject*>bullet_arr=p_player.get_bullet_list();
+		for(int r=0;r<bullet_arr.size();r++){
+            BulletObject* p_bullet=bullet_arr.at(r);
+            if(p_bullet!=NULL){
+                for(int t=0;t<threats_list.size();t++){
+                    ThreatsObject*obj_threat=threats_list.at(t);
+                    if(obj_threat!=NULL){
+                        SDL_Rect tRect;
+                        tRect.x=obj_threat->GetRect().x;
+                        tRect.y=obj_threat->GetRect().y;
+                        tRect.w=obj_threat->get_width_frame();// không lấy full ảnh của frame
+                        tRect.w=obj_threat->get_height_frame();
+
+                        SDL_Rect bRect = p_bullet->GetRect();
+
+                        bool bCol = SDLCommonFunction::CheckCollision(bRect,tRect);
+                        if(bCol==true){
+                            p_player.RemoveBullet(r);
+                            obj_threat-> Free();
+                            threats_list.erase(threats_list.begin()+t);
+                        }
+                    }
+                }
+            }
+		}
 
 		SDL_RenderPresent(g_screen);
 

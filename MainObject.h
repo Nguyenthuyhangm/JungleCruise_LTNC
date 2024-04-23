@@ -26,7 +26,7 @@ public:
 
 	bool LoadImg(std::string path, SDL_Renderer* Screen);
 	bool LoadImg1(std::string path, SDL_Renderer* Screen);
-	void Show(SDL_Renderer* des);//Show Frame; 
+	void Show(SDL_Renderer* des);//Show Frame;
 	void HandleInputAction(SDL_Event events, SDL_Renderer* Screen);
 	void Animation();//chuyên xử lý hiệu ứng, animation
 
@@ -43,10 +43,10 @@ public:
 	vector<BulletObject*>get_bullet_list()const { return p_bullet_list; }
 	void HandleBullet(SDL_Renderer* des);
 	void IncreaseFruit();
-
+    void RemoveBullet(const int& idx);
 private:
 	int fruit_count;// số lượng tiền ăn được ban đầu
-	vector<BulletObject*> p_bullet_list;// băng đạn 
+	vector<BulletObject*> p_bullet_list;// băng đạn
 	float x_val_;
 	float y_val_;
 
@@ -59,7 +59,7 @@ private:
 	SDL_Rect frame_clip_[8];
 	Input input_type_;//bien chuyen luu trang thai
 	int frame_;//bien luu frame dang o frame nao
-	int status_;//trang thai 
+	int status_;//trang thai
 	bool on_ground;
 
 	int map_x_;
