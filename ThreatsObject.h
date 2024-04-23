@@ -52,6 +52,9 @@ public:
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void set_bullet_list(const std::vector<BulletObject*>& bl_list) { bullet_list_ = bl_list; }
     void InitBullet(BulletObject* p_bullet,SDL_Renderer* Screen);
+    void InitBullet1(BulletObject* p_bullet,SDL_Renderer* Screen);
+    void InitBullet2(BulletObject* p_bullet,SDL_Renderer* Screen);
+
     void MakeBullet(SDL_Renderer* Screen, const int& x_limit,const int& y_limit);
 
 private:

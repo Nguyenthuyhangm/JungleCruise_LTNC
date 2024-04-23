@@ -24,6 +24,8 @@ public:
         LASER_BULLET=51,
         SOFIA_BULLET=50,
         COMMON_BULLET=52,
+        TRUNK_BULLET=53,
+        BEE_BULLET=54,
 	};
 	void Set_x_val(const int& xVal) {
 		x_val_= xVal;

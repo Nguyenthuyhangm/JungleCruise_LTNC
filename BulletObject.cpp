@@ -19,11 +19,19 @@ void BulletObject::LoadImgBullet(SDL_Renderer* des){
 
     }
     else if(bullet_type==COMMON_BULLET){
-            LoadImg("Base//Bullet.png",des);
+            LoadImg("Base//Bullet1.png",des);
 
     }
     else if(bullet_type==SOFIA_BULLET){
             LoadImg("Base//Banana1.png",des);
+
+    }
+    else if(bullet_type==TRUNK_BULLET){
+            LoadImg("Base//Bullet.png",des);
+
+    }
+    else if(bullet_type==BEE_BULLET){
+            LoadImg("Base//Bullet2.png",des);
 
     }
 }
@@ -43,6 +51,12 @@ void BulletObject::HandleMove(const int& x_border, const int& y_border) {
 	}
 	else if(bullet_dir==DIR_UP){
         rect_.y-=y_val_;
+        if(rect_.y<0){
+            is_move=false;
+        }
+	}
+	else if(bullet_dir==DIR_DOWN){
+        rect_.y+=y_val_;
         if(rect_.y<0){
             is_move=false;
         }

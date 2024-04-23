@@ -70,9 +70,26 @@ vector<ThreatsObject*>MakeThreadsList()
 {
 	vector<ThreatsObject*>list_threats;
 
+    ThreatsObject* trunk_objs = new ThreatsObject[30];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (trunk_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Base//Trunk.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(4000+ i*500);
+			p_threat->set_y_pos(450);
+			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+			p_threat->set_input_left(0);
+			list_threats.push_back(p_threat);
+
+            BulletObject* p_bullet=new BulletObject();
+            p_threat->InitBullet1(p_bullet,g_screen);
+            list_threats.push_back(p_threat);
+		}
+	}
 
 
-	ThreatsObject* plant_objs = new ThreatsObject[10];
+	ThreatsObject* plant_objs = new ThreatsObject[40];
 	for (int i = 0; i < 10; i++) {
 		ThreatsObject* p_threat = (plant_objs + i);
 		if (p_threat != NULL) {
@@ -81,14 +98,14 @@ vector<ThreatsObject*>MakeThreadsList()
 			p_threat->set_x_pos(800+ i*500);
 			p_threat->set_y_pos(450);
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-			p_threat->set_input_left(1);
+			p_threat->set_input_left(0);
 			list_threats.push_back(p_threat);
             BulletObject* p_bullet=new BulletObject();
             p_threat->InitBullet(p_bullet,g_screen);
             list_threats.push_back(p_threat);
 		}
 	}
-    ThreatsObject* threats_objs = new ThreatsObject[20];
+    ThreatsObject* threats_objs = new ThreatsObject[40];
         for (int i = 0; i < 10; i++) {
             ThreatsObject* p_threat = (threats_objs + i);
             if (p_threat != NULL) {
@@ -102,7 +119,7 @@ vector<ThreatsObject*>MakeThreadsList()
 
             }
         }
-	ThreatsObject* shoot_objs = new ThreatsObject[10];
+	ThreatsObject* shoot_objs = new ThreatsObject[20];
 	for (int i = 0; i < 10; i++) {
 		ThreatsObject* p_threat = (shoot_objs + i);
 		if (p_threat != NULL) {
@@ -116,18 +133,22 @@ vector<ThreatsObject*>MakeThreadsList()
 
 		}
 	}
-	ThreatsObject* roll_objs = new ThreatsObject[10];
+	ThreatsObject* roll_objs = new ThreatsObject[40];
 	for (int i = 0; i < 10; i++) {
 		ThreatsObject* p_threat = (roll_objs + i);
 		if (p_threat != NULL) {
 			p_threat->LoadImg("Base//Bee.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_x_pos(400+ i*500);
+			p_threat->set_x_pos(3000+ i*500);
 			p_threat->set_y_pos(200);
             p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
             p_threat->set_input_left(0);
 
 			list_threats.push_back(p_threat);
+
+            BulletObject* p_bullet=new BulletObject();
+            p_threat->InitBullet2(p_bullet,g_screen);
+            list_threats.push_back(p_threat);
 
 		}
     }
@@ -208,7 +229,16 @@ int main(int argc, char* argv[])
 			SDL_Delay(delay_time);
 		}
 	}
-
-	close();
-	return 0;
+    for(int i=0; i<threats_list.size(); i++)
+    {
+        ThreatsObject* p_threat=threats_list.at(i);
+        if(p_threat)
+        {
+            p_threat->Free();
+            p_threat=NULL;
+        }
+    }
+    threats_list.clear();
+    close();
+    return 0;
 }

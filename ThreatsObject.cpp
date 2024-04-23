@@ -242,6 +242,28 @@ void ThreatsObject::InitBullet(BulletObject* p_bullet,SDL_Renderer* Screen){
         bullet_list_.push_back(p_bullet);
     }
 }
+void ThreatsObject::InitBullet1(BulletObject* p_bullet,SDL_Renderer* Screen){
+    if(p_bullet!=NULL){
+        p_bullet->set_bullet_type(BulletObject::TRUNK_BULLET);
+        p_bullet->LoadImgBullet(Screen);
+        p_bullet->set_is_move(true);
+        p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
+        p_bullet->SetRect(rect_.x+5,y_pos_+10);
+        p_bullet-> Set_x_val(15);
+        bullet_list_.push_back(p_bullet);
+    }
+}
+void ThreatsObject::InitBullet2(BulletObject* p_bullet,SDL_Renderer* Screen){
+    if(p_bullet!=NULL){
+        p_bullet->set_bullet_type(BulletObject::BEE_BULLET);
+        p_bullet->LoadImgBullet(Screen);
+        p_bullet->set_is_move(true);
+        p_bullet->set_bullet_dir(BulletObject::DIR_DOWN);
+        p_bullet->SetRect(rect_.x+5,y_pos_+10);
+        p_bullet-> Set_y_val(15);
+        bullet_list_.push_back(p_bullet);
+    }
+}
 void ThreatsObject::MakeBullet(SDL_Renderer* Screen,const int& x_limit,const int&y_limit){
     for(int i=0;i<bullet_list_.size();i++){
         BulletObject* p_bullet=bullet_list_.at(i);
