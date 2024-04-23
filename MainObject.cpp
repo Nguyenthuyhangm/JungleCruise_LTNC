@@ -135,18 +135,19 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->LoadImg("Base//Banana1.png", Screen);
             if(status_==WALK_LEFT){
-                p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
+                p_bullet->set_bullet_dir(BulletObject::DIR_UP);
                 p_bullet-> SetRect(this->rect_.x,rect_.y+height_frame_*0.3);
 
             }
             else{
-                p_bullet->set_bullet_dir(BulletObject::DIR_RIGHT);
+                p_bullet->set_bullet_dir(BulletObject::DIR_UP);
                 p_bullet-> SetRect(this->rect_.x+width_frame_-20,rect_.y+height_frame_*0.3);
             }
 
 			//set vị trí phù hợp
 			p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.3);
 			p_bullet->Set_x_val(20);// tốc độ di chuyển của viên đạn
+			p_bullet->Set_y_val(20);
 			p_bullet->set_is_move(true);
 
 			p_bullet_list.push_back(p_bullet);

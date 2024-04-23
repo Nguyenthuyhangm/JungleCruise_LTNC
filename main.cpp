@@ -86,7 +86,6 @@ vector<ThreatsObject*>MakeThreadsList()
 			p_threat->SetAnimationPos(pos1,pos2);
 			p_threat->set_input_left(1);
 
-			list_threats.push_back(p_threat);
 		}
 	}
     ThreatsObject* threats_objs = new ThreatsObject[20];
