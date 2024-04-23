@@ -9,7 +9,12 @@ class BulletObject : public BaseObject {
 public:
 	BulletObject();
 	~BulletObject();
-	
+
+	enum BULLET_DIR{
+	    DIR_RIGHT=20,
+	    DIR_LEFT=21,
+
+	};
 	void Set_x_val(const int& xVal) {
 		x_val_= xVal;
 	}
@@ -23,12 +28,15 @@ public:
 		is_move = isMove;
 	}
 	bool get_is_move()const { return is_move; }
-	void HandleMove(const int& x_border, const int& y_border);// giới hạn hiển thị 
+	void HandleMove(const int& x_border, const int& y_border);// giới hạn hiển thị
+    void set_bullet_dir(const unsigned int& bulletDir){bullet_dir=bulletDir;}
+    int get_bullet_object(){return bullet_dir;}
 
 private:
 	int x_val_;
 	int y_val_;
 	bool is_move;
+	unsigned int bullet_dir;
 
 };
 #endif

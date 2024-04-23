@@ -1,10 +1,11 @@
 ﻿#include "ThreatsObject.h"
-
+#include<windows.h>
+#include<iostream>
 ThreatsObject::ThreatsObject() {
     width_frame_ = 0;
     height_frame_ = 0;
-    x_val_ = 0.0;
-    y_val_ = 0.0;
+    x_val_ = 2.0;
+    y_val_ = 2.0;
     x_pos_ = 0.0;
     y_pos_ = 0.0;
     on_ground_ = false;
@@ -14,7 +15,7 @@ ThreatsObject::ThreatsObject() {
     animation_a_ = 0;
     animation_b_ = 0;
     //Khởi đầu là quay trái
-    input_type_.left_ = 0;
+    input_type_.left_ = 1;
     type_move_ = STATIC_THREAT;
 
 }
@@ -56,31 +57,37 @@ void ThreatsObject::Show(SDL_Renderer* des) {
 }
 
 void ThreatsObject::DoPlayer(Map& gMap) {
-    if (come_back_time_ == 0) {
-        x_val_ = 4;
+    if(come_back_time_  == 0)
+    {
         y_val_ += THREAT_GRAVITY_SPEED;
-        if (y_val_ >= THREAT_MAX_FALL_SPEED) {
+        if(y_val_ >= THREAT_MAX_FALL_SPEED)
+        {
             y_val_ = THREAT_MAX_FALL_SPEED;
         }
         //x_val_ cứ tăng x_pos_ được cộng x_val_ ở cuối hàm CheckToMap cho đến khi ở hàm ImpMoveType thì chặn 2 đầu a b, đến a thì quay phải, đến b thì trái
-        if (input_type_.left_ == 1) {
-            x_val_ -= THREAT_SPEED;
+        if(input_type_.left_ == 1)
+        {
+           x_val_ = 3;
         }
-        else if (input_type_.right_ == 1) {
-            x_val_ += THREAT_SPEED;
+        if(input_type_.right_ == 1)
+        {
+           x_val_ = -3;
+           // x_val_ += THREAT_SPEED;
         }
         CheckToMap(gMap);
     }
-    else if (come_back_time_ > 0) {
-        come_back_time_--;
-        if (come_back_time_ == 0) {
+    else if(come_back_time_ > 0)
+    {
+        come_back_time_ --;
+        if( come_back_time_ == 0)
+        {
             InitThreats();
         }
     }
 }
 void ThreatsObject::InitThreats() {
-    x_val_ = 0;
-    y_val_ = 0;
+    x_val_ = -2;
+    y_val_ = 2;
     if (x_pos_ > 256) {
         x_pos_ -= 256;
         //Trừ cả khoảng luôn
@@ -90,9 +97,9 @@ void ThreatsObject::InitThreats() {
     else {
         x_pos_ = 0;
     }
-    y_pos_ = TILE_SIZE;
+    y_pos_ = 0;
     come_back_time_ = 0;
-    input_type_.right_ = 0;
+    input_type_.left_ = ~input_type_.left_;
 }
 void ThreatsObject::CheckToMap(Map& map_data) {
     //Định vị trí đầu cuối
@@ -125,7 +132,6 @@ void ThreatsObject::CheckToMap(Map& map_data) {
     if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y) {
         if (x_val_ > 0) //Di chuyển sang phải
         {
-            //Nếu ăn phải tiền thì ô tiền biến mất
             int val1 = map_data.tile[y1][x2];
             int val2 = map_data.tile[y2][x2];
             //Kiểm tra xem ô bên phải có phải là ô trống hay không
@@ -134,8 +140,9 @@ void ThreatsObject::CheckToMap(Map& map_data) {
                 //Nếu mà chạm tường thì x_pos_ chỉ dừng ở đó
                 //x_val_ = 0
                 x_pos_ -= width_frame_ + 1;
-                x_val_ = 0;
+                //x_val_ = 0;
                 input_type_.left_ = 1;
+                input_type_.right_ = 0;
             }
         }
         //di chuyển sang trái
@@ -146,8 +153,9 @@ void ThreatsObject::CheckToMap(Map& map_data) {
             if (((val1 >= 1 && val1 <= 18) && val1 != STAFF_FRUIT||LACAY) || ((val2 >= 1 && val2 <= 18) && val2 != STAFF_FRUIT||LACAY)) {
                 //Lùi chạm đá thì giữ vị trí, x_val_ = 0 luôn
                 x_pos_ = (x1 + 1) * TILE_SIZE;
-                x_val_ = 0;
+               // x_val_ = 0;
                 input_type_.right_ = 1;
+                input_type_.left_ = 0;
             }
         }
     }
@@ -201,21 +209,29 @@ void ThreatsObject::CheckToMap(Map& map_data) {
 void ThreatsObject::ImpMoveType(SDL_Renderer* screen) {
     //Đứng im 1 chỗ
     if (type_move_ == STATIC_THREAT) {
-        ;
+            ;
     }
+
     //Nếu không thì di chuyển
-    else {
+    if (type_move_==MOVE_IN_SPACE_THREAT){
+
         //Đứng trên mặt đất mới di chuyển
-            if (x_pos_ > animation_b_) {
+//        if(on_ground_==true){
+            if (x_pos_ < animation_b_) {
+
                 input_type_.left_ = 1;
                 input_type_.right_ = 0;
+                LoadImg("Base//Run Rad1.png", screen);
+
             }
-            else if (x_pos_ < animation_a_) {
+            else if (x_pos_ > animation_a_) {
                 input_type_.right_ = 1;
                 input_type_.left_ = 0;
-            }
+                LoadImg("Base//Run Rad.png", screen);
 
-    }
+            }
+        }
+
         if (input_type_.left_ == 1) {
             LoadImg("Base//Run Rad1.png", screen);
         }
@@ -223,8 +239,9 @@ void ThreatsObject::ImpMoveType(SDL_Renderer* screen) {
         else if (input_type_.right_ == 1) {
             LoadImg("Base//Run Rad.png", screen);
         }
+    }
 
- }
+// }
 
 SDL_Rect ThreatsObject::GetRectFrame() {
     SDL_Rect rect;

@@ -1,5 +1,7 @@
 ﻿#include"MainObject.h"
 #include"CommonFunction.h"
+#include <time.h>
+#include<iostream>
 using namespace std;
 
 
@@ -28,7 +30,6 @@ MainObject::~MainObject()
 {
 
 }
-
 bool MainObject::LoadImg(string path, SDL_Renderer* Screen)
 {
 	bool ret = BaseObject::LoadImg(path, Screen);
@@ -43,14 +44,14 @@ void MainObject::Animation()
 {
 	if (width_frame_ > 0 && height_frame_ > 0)//tọa độ của frame ->set clip
 	{
-		for(int i=0;i<8;i++){	//có 8 frame nên cho vòng lặp chạy đến 8 
+		for(int i=0;i<8;i++){	//có 8 frame nên cho vòng lặp chạy đến 8
 			frame_clip_[i].x = width_frame_ * i;
 			frame_clip_[i].y = 0;
 			frame_clip_[i].w = width_frame_;
 			frame_clip_[i].h = height_frame_;
 		}
 	}
-}  
+}
 
 void MainObject::Show(SDL_Renderer* des)
 {
@@ -59,12 +60,12 @@ void MainObject::Show(SDL_Renderer* des)
 		frame_++;//di chuyển
 	}
 	else {
-		frame_ = 0;// đứng im 
+		frame_ = 0;// đứng im
 	}
 	if (frame_ >= 8) {
 		frame_ = 0;//set dd
 	}
-	rect_.x = x_pos_- map_x_;// tính từ điểm mốc ban đầu đến điểm map hiện tại 
+	rect_.x = x_pos_- map_x_;// tính từ điểm mốc ban đầu đến điểm map hiện tại
 	rect_.y = y_pos_- map_y_;
 
 	SDL_Rect* current_clip = &frame_clip_[frame_];//lấy frame hiện tại
@@ -96,7 +97,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 		{
 			input_type_.jump_ = 1;
 			UpdateImagePlayer(Screen);
-			
+
 		}
 		break;
 		default:
@@ -125,7 +126,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 		default:
 			break;
 		}
-	} 
+	}
 	if (events.type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (events.button.button ==SDL_BUTTON_LEFT)
@@ -133,8 +134,15 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->LoadImg("Base//Banana1.png", Screen);
-			frame_++;
-			Animation();
+            if(status_==WALK_LEFT){
+                p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
+                p_bullet-> SetRect(this->rect_.x,rect_.y+height_frame_*0.3);
+
+            }
+            else{
+                p_bullet->set_bullet_dir(BulletObject::DIR_RIGHT);
+                p_bullet-> SetRect(this->rect_.x+width_frame_-20,rect_.y+height_frame_*0.3);
+            }
 
 			//set vị trí phù hợp
 			p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.3);
@@ -169,9 +177,9 @@ void MainObject::DoPlayer(Map& map_data)
 {
 	if (come_back_time == 0) {
 		x_val_ = 0;
-		y_val_ += GRAVITY;//rơi từ từ xuống 
+		y_val_ += GRAVITY;//rơi từ từ xuống
 
-		//giới hạn tốc độ rơi 
+		//giới hạn tốc độ rơi
 		if (y_val_ >= 12) {
 			y_val_ = 12;
 		}
@@ -211,7 +219,7 @@ void MainObject::DoPlayer(Map& map_data)
 void MainObject::CenterEntityOnMap(Map& map_data)
 {
 	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 2);//lượng mà nhân vật di chuyển và bản đồ đc cuốn theo
-	if (map_data.start_x_ < 0){// khi lùi dần thì k cho phép bản đồ lùi thêm nữa 
+	if (map_data.start_x_ < 0){// khi lùi dần thì k cho phép bản đồ lùi thêm nữa
 		map_data.start_x_ = 0;
 	}
 	else if (map_data.start_x_ + SCREEN_WIDTH >= map_data.max_x_)//bằng đúng chiều dài tối đa của bản đồ -> k cho bản đồ di chuyển thêm
@@ -230,7 +238,7 @@ void MainObject::CenterEntityOnMap(Map& map_data)
 	}
 }
 
-// kiểm tra xem map và nhân vật có va chạm hay không ? 
+// kiểm tra xem map và nhân vật có va chạm hay không ?
 void MainObject::Checkmap(Map& map_data)
 {
 	int x1 = 0;
@@ -238,13 +246,13 @@ void MainObject::Checkmap(Map& map_data)
 
 	int y1 = 0;
 	int y2 = 0;
-	//check theo chiều ngang 
+	//check theo chiều ngang
 	/*int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;*/
 	int height_min = min(height_frame_, TILE_SIZE);
 
 	x1 = (x_pos_ + x_val_) / TILE_SIZE;
-	x2 = (x_pos_ + x_val_ + width_frame_-1) / TILE_SIZE;// kiểm tra đường biên 
-	
+	x2 = (x_pos_ + x_val_ + width_frame_-1) / TILE_SIZE;// kiểm tra đường biên
+
 	y1 = (y_pos_) / TILE_SIZE;
 	y2 = (y_pos_ + height_min - 1) / TILE_SIZE;
 
@@ -253,7 +261,7 @@ void MainObject::Checkmap(Map& map_data)
 		if (x_val_ > 0)//main object đang di chuyển sang phải
 		{
 			int val1 = map_data.tile[y1][x2];
-			int val2 = map_data.tile[y2][x2]; 
+			int val2 = map_data.tile[y2][x2];
 			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
 				map_data.tile[y1][x2] = 0;// cho chạm vào xong biến mất
 				map_data.tile[y2][x2] = 0;
@@ -285,7 +293,7 @@ void MainObject::Checkmap(Map& map_data)
 				IncreaseFruit();
 			}
 			if (val1 == LACAY || val2 == LACAY) {
-				map_data.tile[y1][x1] = 0;// cho chạm vào xong biến mất
+                map_data.tile[y1][x1] = 0;// cho chạm vào xong biến mất
 				map_data.tile[y2][x1] = 0;
 			}
 			if (map_data.tile[y1][x1] != 0 || map_data.tile[y2][x1] != 0)
@@ -354,6 +362,7 @@ void MainObject::Checkmap(Map& map_data)
 	}
 	x_pos_ += x_val_;
 	y_pos_ += y_val_;// chạy bth
+
 	if (x_pos_ < 0) {
 		x_pos_ = 0;
 	}
@@ -376,5 +385,5 @@ void MainObject::UpdateImagePlayer(SDL_Renderer* des) {
 			LoadImg("Base//Run1.png", des);
 		}
 	}
-	
+
 }

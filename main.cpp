@@ -69,8 +69,7 @@ bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay khôn
 vector<ThreatsObject*>MakeThreadsList()
 {
 	vector<ThreatsObject*>list_threats;
-	int x_stand[15] = { 22,34,45,64,66,105,146,178,215,231,299,354,368,392 };
-	int x_move[25] = { 5,15,24,48,55,80,88,89,123,155,159,164,174,198,238,245,255,270,281,293,301,334,351,383,384 };
+
 
 	ThreatsObject* dynamic_threats = new ThreatsObject[20];
 	for (int i = 0; i < 20; i++) {
@@ -79,13 +78,13 @@ vector<ThreatsObject*>MakeThreadsList()
 			p_threat->LoadImg("Base//Run Rad1.png", g_screen);
 			p_threat->set_clips();
 			p_threat->set_type_move(ThreatsObject::MOVE_IN_SPACE_THREAT);
-			p_threat->set_x_pos(x_move[i]* TILE_SIZE);
-			p_threat->set_y_pos(500);
+			p_threat->set_x_pos(500+ i*500);
+			p_threat->set_y_pos(450);
 
-			int pos1 = p_threat->get_x_pos() - 30;
-			int pos2 = p_threat->get_x_pos() + 100;
+			int pos1 = p_threat->get_x_pos() - 200;
+			int pos2 = p_threat->get_x_pos() + 200;
 			p_threat->SetAnimationPos(pos1,pos2);
-			p_threat->set_input_left(1);
+			p_threat->set_input_left(0);
 
 			list_threats.push_back(p_threat);
 		}
@@ -99,8 +98,8 @@ vector<ThreatsObject*>MakeThreadsList()
 		if (p_threat != NULL) {
 			p_threat->LoadImg("Base//Bee.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_x_pos(x_stand[i] * TILE_SIZE);
-			p_threat->set_y_pos(500);
+			p_threat->set_x_pos(500+ i*500);
+			p_threat->set_y_pos(200);
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
 			p_threat->set_input_left(0);
 			list_threats.push_back(p_threat);
