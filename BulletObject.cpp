@@ -6,11 +6,26 @@ BulletObject::BulletObject()
 	x_val_ = 0;
 	y_val_ = 0;
 	is_move = false;
+	bullet_type = SOFIA_BULLET;
 }
 
 BulletObject::~BulletObject()
 {
 
+}
+void BulletObject::LoadImgBullet(SDL_Renderer* des){
+    if(bullet_type==LASER_BULLET){
+            LoadImg("Base//Laser.png",des);
+
+    }
+    else if(bullet_type==COMMON_BULLET){
+            LoadImg("Base//Bullet.png",des);
+
+    }
+    else if(bullet_type==SOFIA_BULLET){
+            LoadImg("Base//Banana1.png",des);
+
+    }
 }
 
 void BulletObject::HandleMove(const int& x_border, const int& y_border) {

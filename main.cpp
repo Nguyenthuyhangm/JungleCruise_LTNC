@@ -71,20 +71,18 @@ vector<ThreatsObject*>MakeThreadsList()
 	vector<ThreatsObject*>list_threats;
 
 
-	ThreatsObject* dynamic_threats = new ThreatsObject[20];
+
+	ThreatsObject* plant_objs = new ThreatsObject[10];
 	for (int i = 0; i < 10; i++) {
-		ThreatsObject* p_threat = dynamic_threats + i;
+		ThreatsObject* p_threat = (plant_objs + i);
 		if (p_threat != NULL) {
 			p_threat->LoadImg("Base//plant.png", g_screen);
 			p_threat->set_clips();
+			p_threat->set_x_pos(800+ i*500);
+			p_threat->set_y_pos(450);
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-			p_threat->set_x_pos(700+ i*500);
-			p_threat->set_y_pos(500);
-
-			int pos1 = p_threat->get_x_pos() - 200;
-			int pos2 = p_threat->get_x_pos() + 200;
-			p_threat->SetAnimationPos(pos1,pos2);
 			p_threat->set_input_left(1);
+			list_threats.push_back(p_threat);
 
 		}
 	}
@@ -102,8 +100,6 @@ vector<ThreatsObject*>MakeThreadsList()
 
             }
         }
-
-
 	ThreatsObject* shoot_objs = new ThreatsObject[10];
 	for (int i = 0; i < 10; i++) {
 		ThreatsObject* p_threat = (shoot_objs + i);
