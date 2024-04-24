@@ -427,7 +427,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1713897423 source:c:\users\admin88\documents\junglecruise_ltnc\bulletobject.cpp
+1713947828 source:c:\users\admin88\documents\junglecruise_ltnc\bulletobject.cpp
 
 1713901138 source:c:\users\admin88\documents\junglecruise_ltnc\commonfuction.cpp
 	"CommonFunction.h"
@@ -444,7 +444,7 @@
 1713863361 source:c:\users\admin88\documents\junglecruise_ltnc\imptimer.cpp
 	"CommonFunction.h"
 
-1713900309 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
+1713947709 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
 	"BaseObject.h"
 	"game_map.h"
 	"MainObject.h"

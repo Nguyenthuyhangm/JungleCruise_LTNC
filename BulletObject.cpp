@@ -61,24 +61,24 @@ void BulletObject::HandleMove(const int& x_border, const int& y_border) {
             is_move=false;
         }
 	}
-//	else if(bullet_dir==DIR_UP_LEFT){
-//        rect_.x-=x_val_;
-//        if(rect_.x<0){
-//            is_move=false;
-//        }
-//        rect_.y-=y_val_;
-//        if(rect_.y<0){
-//            is_move=false;
-//        }
-//	}
-//	else if(bullet_dir==DIR_UP_RIGHT){
-//        rect_.x+=x_val_;
-//        if(rect_.x>x_border){
-//            is_move=false;
-//        }
-//        rect_.y-=y_val_;
-//        if(rect_.y<0){
-//            is_move=false;
-//        }
-//	}
+	else if(bullet_dir==DIR_UP_LEFT){
+        rect_.x-=x_val_;
+        if(rect_.x<0){
+            is_move=false;
+        }
+        rect_.y-=y_val_;
+        if(rect_.y<0){
+            is_move=false;
+        }
+	}
+	else if(bullet_dir==DIR_UP_RIGHT){
+        rect_.x+=x_val_;
+        if(rect_.x>x_border){
+            is_move=false;
+        }
+        rect_.y-=y_val_;
+        if(rect_.y<0){
+            is_move=false;
+        }
+	}
 }

@@ -218,7 +218,7 @@ int main(int argc, char* argv[])
 			}
 		}
 		//lấy danh sách các viên đạn của threats
-		vector<BulletObject*>bullet_arr=p_player.get_bullet_list();
+		std::vector<BulletObject*>bullet_arr=p_player.get_bullet_list();
 		for(int r=0;r<bullet_arr.size();r++){
             BulletObject* p_bullet=bullet_arr.at(r);
             if(p_bullet!=NULL){
@@ -229,7 +229,7 @@ int main(int argc, char* argv[])
                         tRect.x=obj_threat->GetRect().x;
                         tRect.y=obj_threat->GetRect().y;
                         tRect.w=obj_threat->get_width_frame();// không lấy full ảnh của frame
-                        tRect.w=obj_threat->get_height_frame();
+                        tRect.h=obj_threat->get_height_frame();
 
                         SDL_Rect bRect = p_bullet->GetRect();
 
