@@ -177,7 +177,7 @@ int main(int argc, char* argv[])
 
 
     vector<ThreatsObject*>threats_list = MakeThreadsList();
-
+    int solanchet=0;
 	bool is_quit = false;
 	while (!is_quit)
 	{
@@ -216,31 +216,44 @@ int main(int argc, char* argv[])
 				p_threat->MakeBullet(g_screen,SCREEN_WIDTH,SCREEN_HEIGHT);
 				p_threat->Show(g_screen);
 
-				SDL_Rect rect_player= p_player.GetRect();
+				SDL_Rect rect_player= p_player.GetRectFrame();
 				bool bCol1=false;
 				std::vector<BulletObject*>tBullet_list=p_threat->get_bullet_list();
-				for(int g=0;g<tBullet_list.size();g++){
-                    BulletObject* Pt_bullet=tBullet_list.at(g);
-                    if(Pt_bullet){
+				for(int jj=0;jj<tBullet_list.size();jj++){
+                    BulletObject* Pt_bullet=tBullet_list.at(jj);
+                    if(Pt_bullet!=NULL){
                         bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
                         if(bCol1==true){
-                            p_threat->RemoveBullet(g);
+                            p_threat->RemoveBullet(jj);
                             break;
                         }
                     }
 				}
-				SDL_Rect rect_threat=p_threat->GetRect();
+				SDL_Rect rect_threat=p_threat->GetRectFrame();
 				bool bCol2=SDLCommonFunction::CheckCollision(rect_player,rect_threat);
-				if(bCol1||bCol2){
-                    if(MessageBox(NULL,"GAME OVER","Info", MB_OK|MB_ICONSTOP)==IDOK){
-                        p_threat->Free();
-                        close();
-                        SDL_Quit();
-                        return 0;
+                if(bCol1==true||bCol2==true)
+                {
+                    solanchet++;
+                    if(solanchet<=3)
+                    {
+                        p_player.SetRect(0,0);
+                        p_player.set_comeback_time(60);
+                        SDL_Delay(1000);
+                        continue;
                     }
-				}
+                    else
+                    {
+                        if(MessageBox(NULL,"GAME OVER","Info", MB_OK|MB_ICONSTOP)==IDOK)
+                        {
+                            p_threat->Free();
+                            close();
+                            SDL_Quit();
+                            return 0;
+                        }
+                    }
+                }
             }
-		}
+        }
 		//lấy danh sách các viên đạn của threats
 		std::vector<BulletObject*>bullet_arr=p_player.get_bullet_list();
 		for(int r=0;r<bullet_arr.size();r++){

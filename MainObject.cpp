@@ -40,13 +40,13 @@ bool MainObject::LoadImg(string path, SDL_Renderer* Screen)
 	}
 	return ret;
 }
-SDL_Rect MainObject::GetRect(){
+SDL_Rect MainObject :: GetRectFrame(){
     SDL_Rect rect;
-    rect.x=rect_.x;
-    rect.y=rect_.y;
-    rect.w=width_frame_;
-    rect.h=height_frame_;
-
+    rect.x = rect_.x;
+    rect.y = rect_.y;
+    rect.w = rect_.x/8;
+    rect.h = rect_.h;
+    return rect;
 }
 
 

@@ -23,13 +23,14 @@ ThreatsObject::ThreatsObject() {
 ThreatsObject::~ThreatsObject() {
 
 }
-SDL_Rect ThreatsObject::GetRect(){
-    SDL_Rect rect;
-    rect.x=rect_.x;
-    rect.y=rect_.y;
-    rect.w=width_frame_;
-    rect.h=height_frame_;
 
+SDL_Rect ThreatsObject :: GetRectFrame(){
+    SDL_Rect rect;
+    rect.x = rect_.x;
+    rect.y = rect_.y;
+    rect.w = rect_.x/8;
+    rect.h = rect_.h;
+    return rect;
 }
 
 

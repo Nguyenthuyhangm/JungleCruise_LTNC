@@ -56,7 +56,7 @@ public:
     void InitBullet2(BulletObject* p_bullet,SDL_Renderer* Screen);
 
     void MakeBullet(SDL_Renderer* Screen, const int& x_limit,const int& y_limit);
-    SDL_Rect GetRect();
+    SDL_Rect GetRectFrame();
     void RemoveBullet(const int& idx);
 
 private:

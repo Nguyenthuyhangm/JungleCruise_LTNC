@@ -44,7 +44,8 @@ public:
 	void HandleBullet(SDL_Renderer* des);
 	void IncreaseFruit();
     void RemoveBullet(const int& idx);
-    SDL_Rect GetRect();
+    SDL_Rect GetRectFrame();
+    void set_comeback_time(const int& cb_time){come_back_time=cb_time;}
 private:
 	int fruit_count;// số lượng tiền ăn được ban đầu
 	vector<BulletObject*> p_bullet_list;// băng đạn
