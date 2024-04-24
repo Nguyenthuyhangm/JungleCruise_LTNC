@@ -261,6 +261,8 @@
 		<Unit filename="Quai/idle2.png" />
 		<Unit filename="Quai/threat_left.png" />
 		<Unit filename="Quai/walk2.png" />
+		<Unit filename="Text.cpp" />
+		<Unit filename="Text.h" />
 		<Unit filename="ThreatsObject.cpp" />
 		<Unit filename="ThreatsObject.h" />
 		<Unit filename="game_map.cpp" />

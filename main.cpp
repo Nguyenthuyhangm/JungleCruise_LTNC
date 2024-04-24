@@ -237,8 +237,8 @@ int main(int argc, char* argv[])
                     if(solanchet<=3)
                     {
                         p_player.SetRect(0,0);
-                        p_player.set_comeback_time(60);
-                        SDL_Delay(1000);
+                        p_player.set_comeback_time(30);
+                        SDL_Delay(500);
                         continue;
                     }
                     else
