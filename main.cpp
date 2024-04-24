@@ -4,7 +4,7 @@
 #include"MainObject.h"
 #include"ImpTimer.h"
 #include"ThreatsObject.h"
-
+#include<windows.h>
 
 using namespace std;
 
@@ -213,9 +213,33 @@ int main(int argc, char* argv[])
 				p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
 				p_threat->ImpMoveType(g_screen);
 				p_threat->DoPlayer(map_data);
-				p_threat->MakeBullet(g_screen,SCREEN_HEIGHT,SCREEN_WIDTH);
+				p_threat->MakeBullet(g_screen,SCREEN_WIDTH,SCREEN_HEIGHT);
 				p_threat->Show(g_screen);
-			}
+
+				SDL_Rect rect_player= p_player.GetRect();
+				bool bCol1=false;
+				std::vector<BulletObject*>tBullet_list=p_threat->get_bullet_list();
+				for(int g=0;g<tBullet_list.size();g++){
+                    BulletObject* Pt_bullet=tBullet_list.at(g);
+                    if(Pt_bullet){
+                        bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
+                        if(bCol1==true){
+                            p_threat->RemoveBullet(g);
+                            break;
+                        }
+                    }
+				}
+				SDL_Rect rect_threat=p_threat->GetRect();
+				bool bCol2=SDLCommonFunction::CheckCollision(rect_player,rect_threat);
+				if(bCol1||bCol2){
+                    if(MessageBox(NULL,"GAME OVER","Info", MB_OK|MB_ICONSTOP)==IDOK){
+                        p_threat->Free();
+                        close();
+                        SDL_Quit();
+                        return 0;
+                    }
+				}
+            }
 		}
 		//lấy danh sách các viên đạn của threats
 		std::vector<BulletObject*>bullet_arr=p_player.get_bullet_list();

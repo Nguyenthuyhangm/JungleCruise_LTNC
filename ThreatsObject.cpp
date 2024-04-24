@@ -23,6 +23,15 @@ ThreatsObject::ThreatsObject() {
 ThreatsObject::~ThreatsObject() {
 
 }
+SDL_Rect ThreatsObject::GetRect(){
+    SDL_Rect rect;
+    rect.x=rect_.x;
+    rect.y=rect_.y;
+    rect.w=width_frame_;
+    rect.h=height_frame_;
+
+}
+
 
 bool ThreatsObject::LoadImg(std::string path, SDL_Renderer* screen) {
     bool ret = BaseObject::LoadImg(path, screen);
@@ -287,5 +296,15 @@ void ThreatsObject::MakeBullet(SDL_Renderer* Screen,const int& x_limit,const int
 }
 //x_pos là chỉ số ứng với toàn bộ bản đồ
 //rect là vị trí của threat trong màn hình
-
+void ThreatsObject::RemoveBullet(const int& idx){
+    int size = bullet_list_.size();
+    if(size>0&&idx<size){
+        BulletObject* p_bullet=bullet_list_.at(idx);
+        bullet_list_.erase(bullet_list_.begin()+idx);
+        if(p_bullet){
+            delete p_bullet;
+            p_bullet = NULL;
+        }
+    }
+}
 
