@@ -12,7 +12,6 @@ public:
         BLACK_TEXT=2,
 
     };
-    bool LoadFromFile(std::string path);
     bool LoadFromRenderText(TTF_Font* font,SDL_Renderer* Screen);
     void Free();
 
@@ -23,7 +22,8 @@ public:
     int GetWidth()const {return width_;}
     int GetHeight()const{return height_;}
 
-    void setText (const std::string& text){str_val_}
+    void setText (const std::string& text){str_val_=text;}
+    std::string GetText()const {return str_val_;}
 private:
     std::string str_val_;
     SDL_Color text_color;
