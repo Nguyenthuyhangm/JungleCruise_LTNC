@@ -305,6 +305,7 @@ void MainObject::Checkmap(Map& map_data)
 				IncreaseFruit();
 			}
 			if (val1 == LACAY || val2 == LACAY) {
+			    SDL_Delay(100);
 				map_data.tile[y1][x2] = 0;// cho chạm vào xong biến mất
 				map_data.tile[y2][x2] = 0;
 			}

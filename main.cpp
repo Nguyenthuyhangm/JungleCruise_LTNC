@@ -244,7 +244,6 @@ int main(int argc, char* argv[])
                     if(Pt_bullet!=NULL){
                         bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
                         if(bCol1==true){
-                            mark_value++;
                             p_threat->RemoveBullet(jj);
                             break;
                         }
@@ -293,6 +292,7 @@ int main(int argc, char* argv[])
 
                         bool bCol = SDLCommonFunction::CheckCollision(bRect,tRect);
                         if(bCol==true){
+                            mark_value++;
                             p_player.RemoveBullet(r);
                             obj_threat-> Free();
                             threats_list.erase(threats_list.begin()+t);
@@ -331,6 +331,8 @@ int main(int argc, char* argv[])
         mark_game.setText(strMark);
         mark_game.LoadFromRenderText(font_time,g_screen);
         mark_game.RenderText(g_screen,SCREEN_WIDTH* 0.5 -50,15);
+        int totalmark=mark_value;
+
 
         int fruit_count = p_player.GetFruitCount();
         std::string fruit_str=std::to_string(fruit_count);
