@@ -6,6 +6,7 @@
 #include"ThreatsObject.h"
 #include<windows.h>
 #include"Text.h"
+#include"Dead.h"
 
 using namespace std;
 
@@ -184,6 +185,13 @@ int main(int argc, char* argv[])
 	p_player.LoadImg("Base//Run.png",g_screen);
 	p_player.Animation();
 
+    Dead player_power;
+    player_power.Init(g_screen);
+
+    PlayerMoney player_money;
+    player_money.Init(g_screen);
+    player_money.SetPos(SCREEN_WIDTH*0.5 - 300 , -6);
+
 
     vector<ThreatsObject*>threats_list = MakeThreadsList();
     int solanchet=0;
@@ -227,6 +235,9 @@ int main(int argc, char* argv[])
 		game_map.Setmap(map_data);
 		game_map.DrawMap(g_screen);
 
+        player_power.Show(g_screen);
+        player_money.Show(g_screen);
+
 		for (int i = 0; i < threats_list.size(); i++) {
 			ThreatsObject* p_threat = threats_list.at(i);
 			if (p_threat != NULL) {
@@ -259,6 +270,8 @@ int main(int argc, char* argv[])
                         p_player.SetRect(0,0);
                         p_player.set_comeback_time(30);
                         SDL_Delay(500);
+                        player_power.DeCrease();
+                        player_power.Render(g_screen);
                         continue;
                     }
                     else
