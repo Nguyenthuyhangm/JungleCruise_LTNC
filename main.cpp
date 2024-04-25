@@ -47,7 +47,11 @@ bool  InitData()
 		if(font_time==NULL){
             return success=false;
 		}
+		if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1){
+            success = false;;
+        }
 
+        g_sound_bullet[0] = Mix_LoadWAV("Sound//Boss hit 1.wav");
 	}
 	return success;
 }
@@ -217,7 +221,7 @@ int main(int argc, char* argv[])
 				is_quit = true;
 			}
 
-			p_player.HandleInputAction(g_event, g_screen);
+			p_player.HandleInputAction(g_event, g_screen,g_sound_bullet);
 		}
 		SDL_SetRenderDrawColor(g_screen, 255, 255, 255, 255);
 		SDL_RenderClear(g_screen);
@@ -255,6 +259,7 @@ int main(int argc, char* argv[])
                     if(Pt_bullet!=NULL){
                         bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
                         if(bCol1==true){
+                            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Suck 1V2.wav"), 0);
                             p_threat->RemoveBullet(jj);
                             break;
                         }
@@ -305,6 +310,8 @@ int main(int argc, char* argv[])
 
                         bool bCol = SDLCommonFunction::CheckCollision(bRect,tRect);
                         if(bCol==true){
+                            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Die.wav"), 0);
+
                             mark_value++;
                             p_player.RemoveBullet(r);
                             obj_threat-> Free();

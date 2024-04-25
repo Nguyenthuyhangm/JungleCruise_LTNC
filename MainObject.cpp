@@ -2,6 +2,7 @@
 #include"CommonFunction.h"
 #include <time.h>
 #include<iostream>
+#include"Dead.h"
 using namespace std;
 
 
@@ -85,7 +86,7 @@ void MainObject::Show(SDL_Renderer* des)
 	SDL_RenderCopy(des, p_object_, current_clip, &renderQuad);//đẩy lên màn hình hiện tại
 }
 
-void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
+void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen,Mix_Chunk* bullet_sound[2])
 {
 	if (events.type == SDL_KEYDOWN)
 	{
@@ -105,6 +106,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 		break;
 		case SDLK_UP:
 		{
+            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Jump 1.wav"), 0);
 			input_type_.jump_ = 1;
 			UpdateImagePlayer(Screen);
 
@@ -144,6 +146,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->set_bullet_type(BulletObject::SOFIA_BULLET);
+			Mix_PlayChannel(-1,bullet_sound[0],0);
 			p_bullet->LoadImgBullet(Screen);
             if(status_==WALK_LEFT){
                 p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
@@ -169,6 +172,7 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* Screen)
 			//tạo viên đạn mới
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->set_bullet_type(BulletObject::LASER_BULLET);
+            Mix_PlayChannel(-1,bullet_sound[0],0);
 			p_bullet->LoadImgBullet(Screen);
             if(status_==WALK_LEFT){
                 p_bullet->set_bullet_dir(BulletObject::DIR_UP_LEFT);
@@ -300,6 +304,7 @@ void MainObject::Checkmap(Map& map_data)
 			int val1 = map_data.tile[y1][x2];
 			int val2 = map_data.tile[y2][x2];
 			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+                Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Fruit collect 1.wav"), 0);
 				map_data.tile[y1][x2] = 0;// cho chạm vào xong biến mất
 				map_data.tile[y2][x2] = 0;
 				IncreaseFruit();
@@ -335,6 +340,7 @@ void MainObject::Checkmap(Map& map_data)
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y2][x1];
 			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+                Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Fruit collect 1.wav"), 0);
 				map_data.tile[y1][x1] = 0;// cho chạm vào xong biến mất
 				map_data.tile[y2][x1] = 0;
 				IncreaseFruit();
@@ -374,6 +380,7 @@ void MainObject::Checkmap(Map& map_data)
 			int val1 = map_data.tile[y2][x1];
 			int val2 = map_data.tile[y2][x2];
 			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+                Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Fruit collect 1.wav"), 0);
 				map_data.tile[y2][x1] = 0;
 				map_data.tile[y2][x2] = 0;
 				IncreaseFruit();
@@ -397,6 +404,7 @@ void MainObject::Checkmap(Map& map_data)
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y1][x2];
 			if (val1 == STAFF_FRUIT || val2 == STAFF_FRUIT) {
+                Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Fruit collect 1.wav"), 0);
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
 				IncreaseFruit();

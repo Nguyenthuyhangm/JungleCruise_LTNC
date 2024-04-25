@@ -27,7 +27,7 @@ public:
 	bool LoadImg(std::string path, SDL_Renderer* Screen);
 	bool LoadImg1(std::string path, SDL_Renderer* Screen);
 	void Show(SDL_Renderer* des);//Show Frame;
-	void HandleInputAction(SDL_Event events, SDL_Renderer* Screen);
+	void HandleInputAction(SDL_Event events, SDL_Renderer* Screen,Mix_Chunk* bullet_sound[2]);
 	void Animation();//chuyên xử lý hiệu ứng, animation
 
 	void DoPlayer(Map& map_data);

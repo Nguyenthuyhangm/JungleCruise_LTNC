@@ -5,7 +5,7 @@
 1713863361 c:\users\admin88\documents\junglecruise_ltnc\baseobject.h
 	"CommonFunction.h"
 
-1713900203 c:\users\admin88\documents\junglecruise_ltnc\commonfunction.h
+1714058040 c:\users\admin88\documents\junglecruise_ltnc\commonfunction.h
 	<string>
 	<SDL.h>
 	<windows.h>
@@ -13,6 +13,7 @@
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 	<vector>
+	<SDL_mixer.h>
 
 1713731180 c:\users\admin88\downloads\sdl2-devel-2.30.2-mingw\sdl2-2.30.2\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -444,7 +445,7 @@
 1713863361 source:c:\users\admin88\documents\junglecruise_ltnc\imptimer.cpp
 	"CommonFunction.h"
 
-1714054592 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
+1714059587 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
 	"BaseObject.h"
 	"game_map.h"
 	"MainObject.h"
@@ -454,7 +455,7 @@
 	"Text.h"
 	"Dead.h"
 
-1714043932 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
+1714058040 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"BulletObject.h"
@@ -471,10 +472,11 @@
 	"BaseObject.h"
 	"BulletObject.h"
 
-1714051930 source:c:\users\admin88\documents\junglecruise_ltnc\mainobject.cpp
+1714059271 source:c:\users\admin88\documents\junglecruise_ltnc\mainobject.cpp
 	"CommonFunction.h"
 	<time.h>
 	<iostream>
+	"Dead.h"
 
 1713970581 source:c:\users\admin88\documents\junglecruise_ltnc\threatsobject.cpp
 	<windows.h>

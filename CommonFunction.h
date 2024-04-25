@@ -9,10 +9,13 @@
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
 #include<vector>
+#include<SDL_mixer.h>
 
 static SDL_Window* g_window = nullptr;
 static SDL_Renderer* g_screen = nullptr;
 static SDL_Event g_event;
+static Mix_Chunk* g_sound_bullet[2];
+static Mix_Chunk* g_sound_exp[2];
 
 //Define Screen
 const int FRAME_PER_SECOND = 30;// chất lượng hình ảnh -> số frame trong 1s
