@@ -5,11 +5,12 @@
 #include"ImpTimer.h"
 #include"ThreatsObject.h"
 #include<windows.h>
+#include"Text.h"
 
 using namespace std;
 
 BaseObject g_background3;
-
+TTF_Font* font_time=NULL;
 
 bool  InitData()
 {
@@ -38,6 +39,14 @@ bool  InitData()
 			if (!(IMG_Init(imgFlags) && imgFlags))
 				success = false;
 		}
+		if(TTF_Init()==-1){
+            success=false;
+		}
+		font_time=TTF_OpenFont("Font//04B_30__.ttf",18);
+		if(font_time==NULL){
+            return success=false;
+		}
+
 	}
 	return success;
 }
@@ -178,6 +187,17 @@ int main(int argc, char* argv[])
 
     vector<ThreatsObject*>threats_list = MakeThreadsList();
     int solanchet=0;
+
+    TextObject time_game;
+    time_game.setColor(TextObject::WHITE_TEXT);
+
+    TextObject mark_game;
+    mark_game.setColor(TextObject::WHITE_TEXT);
+    UINT mark_value =0;
+
+    TextObject fruit_game;
+    fruit_game.setColor(TextObject::WHITE_TEXT);
+
 	bool is_quit = false;
 	while (!is_quit)
 	{
@@ -224,6 +244,7 @@ int main(int argc, char* argv[])
                     if(Pt_bullet!=NULL){
                         bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
                         if(bCol1==true){
+                            mark_value++;
                             p_threat->RemoveBullet(jj);
                             break;
                         }
@@ -281,6 +302,41 @@ int main(int argc, char* argv[])
             }
 		}
 
+		//xử lý thời gian
+        std::string str_time="Time: ";
+        Uint32 time_val=SDL_GetTicks()/1000;//thời gian hiện tại chia cho 1000
+        Uint32 val_time=300-time_val;
+        if(val_time<=0)
+        {
+            if(MessageBox(NULL,"GAME OVER","Info", MB_OK|MB_ICONSTOP)==IDOK)
+            {
+                is_quit=true;
+                break;
+            }
+        }
+            else{
+                std::string str_val=std::to_string(val_time);
+                str_time+=str_val;
+
+                time_game.setText(str_time);
+                time_game.LoadFromRenderText(font_time,g_screen);
+                time_game.RenderText(g_screen,SCREEN_WIDTH-200,15);
+            }
+        std::string val_str_mark=std::to_string(mark_value);
+
+
+        std::string strMark("Score: ");
+        strMark+=val_str_mark;
+
+        mark_game.setText(strMark);
+        mark_game.LoadFromRenderText(font_time,g_screen);
+        mark_game.RenderText(g_screen,SCREEN_WIDTH* 0.5 -50,15);
+
+        int fruit_count = p_player.GetFruitCount();
+        std::string fruit_str=std::to_string(fruit_count);
+        fruit_game.setText(fruit_str);
+        fruit_game.LoadFromRenderText(font_time, g_screen);
+        fruit_game.RenderText(g_screen,SCREEN_WIDTH*0.5 - 250,15);
 		SDL_RenderPresent(g_screen);
 
 		int real_imp_time = fps_timer.get_ticks();// tgian thực sự đã trôi qua

@@ -444,15 +444,16 @@
 1713863361 source:c:\users\admin88\documents\junglecruise_ltnc\imptimer.cpp
 	"CommonFunction.h"
 
-1713974178 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
+1714044354 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
 	"BaseObject.h"
 	"game_map.h"
 	"MainObject.h"
 	"ImpTimer.h"
 	"ThreatsObject.h"
 	<windows.h>
+	"Text.h"
 
-1713972638 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
+1714043932 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"BulletObject.h"
@@ -584,5 +585,9 @@
 	<windows.h>
 	<iostream>
 
-1713973320 source:c:\users\admin88\documents\junglecruise_ltnc\text.cpp
+1714034546 source:c:\users\admin88\documents\junglecruise_ltnc\text.cpp
+	"Text.h"
+
+1714034343 c:\users\admin88\documents\junglecruise_ltnc\text.h
+	"CommonFunction.h"
 
