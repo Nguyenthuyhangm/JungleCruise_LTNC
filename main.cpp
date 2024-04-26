@@ -120,14 +120,14 @@ bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay khôn
 }
 bool LoadImg()//Kiểm tra BackGround load lên có bị lỗi hay không
 {
-    bool res = g_ground.LoadImg("menu.png", g_screen);
+    bool res = g_ground.LoadImg("Base//menu//menu.png", g_screen);
     if (res == false)
         return false;
 
     return true;
 }
 bool Help(){
-    bool chekk=g_help.LoadImg("menu1.png", g_screen);
+    bool chekk=g_help.LoadImg("Base//menu//menu1.png", g_screen);
     if (chekk== false)
         return false;
 
