@@ -445,7 +445,7 @@
 1714103968 source:c:\users\admin88\documents\junglecruise_ltnc\imptimer.cpp
 	"CommonFunction.h"
 
-1714106187 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
+1714125000 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
 	"BaseObject.h"
 	"game_map.h"
 	"MainObject.h"
@@ -454,6 +454,7 @@
 	<windows.h>
 	"Text.h"
 	"Dead.h"
+	"Button.h"
 
 1714103968 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
 	"CommonFunction.h"
@@ -600,4 +601,20 @@
 1714103968 c:\users\admin88\documents\junglecruise_ltnc\dead.h
 	"CommonFunction.h"
 	"BaseObject.h"
+
+1714111599 source:c:\users\admin88\documents\junglecruise_ltnc\button.cpp
+	"button.h"
+
+1714111599 c:\users\admin88\documents\junglecruise_ltnc\button.h
+	<SDL.h>
+	<SDL_ttf.h>
+	"ui.h"
+
+1714111599 c:\users\admin88\documents\junglecruise_ltnc\ui.h
+	<iostream>
+	<SDL.h>
+	<SDL_ttf.h>
+
+1714125086 source:c:\users\admin88\documents\junglecruise_ltnc\ui.cpp
+	"ui.h"
 

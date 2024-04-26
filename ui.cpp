@@ -13,6 +13,7 @@ void UserInterface::loadTexture(SDL_Renderer *const renderer, const char *text)
 	free();
 
 	SDL_Surface *textSurface = TTF_RenderText_Solid(mFont, text, mFontColor);
+	if(mFont == nullptr) std::cout << "huhu\n";
 	if (textSurface == nullptr)
 	{
 		std::cout << "Unable to render text surface! Error: " << TTF_GetError() << std::endl;

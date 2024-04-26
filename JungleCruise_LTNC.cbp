@@ -82,6 +82,8 @@
 		<Unit filename="Base/threat_left.png" />
 		<Unit filename="BulletObject.cpp" />
 		<Unit filename="BulletObject.h" />
+		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
 		<Unit filename="CommonFuction.cpp" />
 		<Unit filename="CommonFunction.h" />
 		<Unit filename="Dead.cpp" />
@@ -291,6 +293,9 @@
 		<Unit filename="map/9.png" />
 		<Unit filename="map/Collected.png" />
 		<Unit filename="map/map01.dat" />
+		<Unit filename="readme.md" />
+		<Unit filename="ui.cpp" />
+		<Unit filename="ui.h" />
 		<Unit filename="x64/Debug/JungleCruise_LTNC.exe" />
 		<Unit filename="x64/Debug/JungleCruise_LTNC.pdb" />
 		<Extensions>
