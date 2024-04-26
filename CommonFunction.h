@@ -32,7 +32,7 @@ const int COLOR_KEY_B = 180;
 #define TILE_SIZE 64
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 10
-#define STAFF_FRUIT 11
+#define STAFF_FRUIT 6
 #define LACAY 4
 #define MELON 14
 #define KIWI 16
