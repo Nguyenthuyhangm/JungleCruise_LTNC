@@ -80,94 +80,94 @@ bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay khôn
 	return true;
 }
 
-//vector<ThreatsObject*>MakeThreadsList()
-//{
-//	vector<ThreatsObject*>list_threats;
-//
-//    ThreatsObject* trunk_objs = new ThreatsObject[30];
-//	for (int i = 0; i < 10; i++) {
-//		ThreatsObject* p_threat = (trunk_objs + i);
-//		if (p_threat != NULL) {
-//			p_threat->LoadImg("Base//Trunk.png", g_screen);
-//			p_threat->set_clips();
-//			p_threat->set_x_pos(4000+ i*500);
-//			p_threat->set_y_pos(450);
-//			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-//			p_threat->set_input_left(0);
-//			list_threats.push_back(p_threat);
-//
-//            BulletObject* p_bullet=new BulletObject();
-//            p_threat->InitBullet1(p_bullet,g_screen);
-//            list_threats.push_back(p_threat);
-//		}
-//	}
-//
-//
-//	ThreatsObject* plant_objs = new ThreatsObject[40];
-//	for (int i = 0; i < 10; i++) {
-//		ThreatsObject* p_threat = (plant_objs + i);
-//		if (p_threat != NULL) {
-//			p_threat->LoadImg("Base//plant.png", g_screen);
-//			p_threat->set_clips();
-//			p_threat->set_x_pos(800+ i*500);
-//			p_threat->set_y_pos(450);
-//			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-//			p_threat->set_input_left(0);
-//			list_threats.push_back(p_threat);
-//            BulletObject* p_bullet=new BulletObject();
-//            p_threat->InitBullet(p_bullet,g_screen);
-//            list_threats.push_back(p_threat);
-//		}
-//	}
-//    ThreatsObject* threats_objs = new ThreatsObject[40];
-//        for (int i = 0; i < 10; i++) {
-//            ThreatsObject* p_threat = (threats_objs + i);
-//            if (p_threat != NULL) {
-//                p_threat->LoadImg("Base//Bird.png", g_screen);
-//                p_threat->set_clips();
-//                p_threat->set_x_pos(500+ i*500);
-//                p_threat->set_y_pos(100);
-//                p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-//                p_threat->set_input_left(1);
-//                list_threats.push_back(p_threat);
-//
-//            }
-//        }
-//	ThreatsObject* shoot_objs = new ThreatsObject[20];
-//	for (int i = 0; i < 10; i++) {
-//		ThreatsObject* p_threat = (shoot_objs + i);
-//		if (p_threat != NULL) {
-//			p_threat->LoadImg("Base//ocsen.png", g_screen);
-//			p_threat->set_clips();
-//			p_threat->set_x_pos(500+ i*500);
-//			p_threat->set_y_pos(500);
-//			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-//			p_threat->set_input_left(1);
-//			list_threats.push_back(p_threat);
-//
-//		}
-//	}
-//	ThreatsObject* roll_objs = new ThreatsObject[40];
-//	for (int i = 0; i < 10; i++) {
-//		ThreatsObject* p_threat = (roll_objs + i);
-//		if (p_threat != NULL) {
-//			p_threat->LoadImg("Base//Bee.png", g_screen);
-//			p_threat->set_clips();
-//			p_threat->set_x_pos(3000+ i*500);
-//			p_threat->set_y_pos(200);
-//            p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-//            p_threat->set_input_left(0);
-//
-//			list_threats.push_back(p_threat);
-//
-//            BulletObject* p_bullet=new BulletObject();
-//            p_threat->InitBullet2(p_bullet,g_screen);
-//            list_threats.push_back(p_threat);
-//
-//		}
-//    }
-//    return list_threats;
-//}
+vector<ThreatsObject*>MakeThreadsList()
+{
+	vector<ThreatsObject*>list_threats;
+
+    ThreatsObject* trunk_objs = new ThreatsObject[30];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (trunk_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Base//Trunk.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(4000+ i*500);
+			p_threat->set_y_pos(450);
+			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+			p_threat->set_input_left(0);
+			list_threats.push_back(p_threat);
+
+            BulletObject* p_bullet=new BulletObject();
+            p_threat->InitBullet1(p_bullet,g_screen);
+            list_threats.push_back(p_threat);
+		}
+	}
+
+
+	ThreatsObject* plant_objs = new ThreatsObject[40];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (plant_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Base//plant.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(800+ i*500);
+			p_threat->set_y_pos(450);
+			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+			p_threat->set_input_left(0);
+			list_threats.push_back(p_threat);
+            BulletObject* p_bullet=new BulletObject();
+            p_threat->InitBullet(p_bullet,g_screen);
+            list_threats.push_back(p_threat);
+		}
+	}
+    ThreatsObject* threats_objs = new ThreatsObject[40];
+        for (int i = 0; i < 10; i++) {
+            ThreatsObject* p_threat = (threats_objs + i);
+            if (p_threat != NULL) {
+                p_threat->LoadImg("Base//Bird.png", g_screen);
+                p_threat->set_clips();
+                p_threat->set_x_pos(500+ i*500);
+                p_threat->set_y_pos(100);
+                p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+                p_threat->set_input_left(1);
+                list_threats.push_back(p_threat);
+
+            }
+        }
+	ThreatsObject* shoot_objs = new ThreatsObject[20];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (shoot_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Base//ocsen.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(500+ i*500);
+			p_threat->set_y_pos(500);
+			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+			p_threat->set_input_left(1);
+			list_threats.push_back(p_threat);
+
+		}
+	}
+	ThreatsObject* roll_objs = new ThreatsObject[40];
+	for (int i = 0; i < 10; i++) {
+		ThreatsObject* p_threat = (roll_objs + i);
+		if (p_threat != NULL) {
+			p_threat->LoadImg("Base//Bee.png", g_screen);
+			p_threat->set_clips();
+			p_threat->set_x_pos(3000+ i*500);
+			p_threat->set_y_pos(200);
+            p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
+            p_threat->set_input_left(0);
+
+			list_threats.push_back(p_threat);
+
+            BulletObject* p_bullet=new BulletObject();
+            p_threat->InitBullet2(p_bullet,g_screen);
+            list_threats.push_back(p_threat);
+
+		}
+    }
+    return list_threats;
+}
 int main(int argc, char* argv[])
 {
 	ImpTimer fps_timer;
@@ -197,7 +197,7 @@ int main(int argc, char* argv[])
     player_money.SetPos(SCREEN_WIDTH*0.5 - 300 , -6);
 
 
-//    vector<ThreatsObject*>threats_list = MakeThreadsList();
+    vector<ThreatsObject*>threats_list = MakeThreadsList();
     int solanchet=0;
 
     TextObject time_game;
@@ -242,85 +242,85 @@ int main(int argc, char* argv[])
         player_power.Show(g_screen);
         player_money.Show(g_screen);
 
-//		for (int i = 0; i < threats_list.size(); i++) {
-//			ThreatsObject* p_threat = threats_list.at(i);
-//			if (p_threat != NULL) {
-//				p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
-//				p_threat->ImpMoveType(g_screen);
-//				p_threat->DoPlayer(map_data);
-//				p_threat->MakeBullet(g_screen,SCREEN_WIDTH,SCREEN_HEIGHT);
-//				p_threat->Show(g_screen);
-//
-//				SDL_Rect rect_player= p_player.GetRectFrame();
-//				bool bCol1=false;
-//				std::vector<BulletObject*>tBullet_list=p_threat->get_bullet_list();
-//				for(int jj=0;jj<tBullet_list.size();jj++){
-//                    BulletObject* Pt_bullet=tBullet_list.at(jj);
-//                    if(Pt_bullet!=NULL){
-//                        bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
-//                        if(bCol1==true){
-//                            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Suck 1V2.wav"), 0);
-//                            p_threat->RemoveBullet(jj);
-//                            break;
-//                        }
-//                    }
-//				}
-//				SDL_Rect rect_threat=p_threat->GetRectFrame();
-//				bool bCol2=SDLCommonFunction::CheckCollision(rect_player,rect_threat);
-//                if(bCol1==true||bCol2==true)
-//                {
-//                    solanchet++;
-//                    if(solanchet<=3)
-//                    {
-//                        p_player.SetRect(0,0);
-//                        p_player.set_comeback_time(30);
-//                        SDL_Delay(500);
-//                        player_power.DeCrease();
-//                        player_power.Render(g_screen);
-//                        continue;
-//                    }
-//                    else
-//                    {
-//                        if(MessageBox(NULL,"GAME OVER","Info", MB_OK|MB_ICONSTOP)==IDOK)
-//                        {
-//                            p_threat->Free();
-//                            close();
-//                            SDL_Quit();
-//                            return 0;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//		//lấy danh sách các viên đạn của threats
-//		std::vector<BulletObject*>bullet_arr=p_player.get_bullet_list();
-//		for(int r=0;r<bullet_arr.size();r++){
-//            BulletObject* p_bullet=bullet_arr.at(r);
-//            if(p_bullet!=NULL){
-//                for(int t=0;t<threats_list.size();t++){
-//                    ThreatsObject*obj_threat=threats_list.at(t);
-//                    if(obj_threat!=NULL){
-//                        SDL_Rect tRect;
-//                        tRect.x=obj_threat->GetRect().x;
-//                        tRect.y=obj_threat->GetRect().y;
-//                        tRect.w=obj_threat->get_width_frame();// không lấy full ảnh của frame
-//                        tRect.h=obj_threat->get_height_frame();
-//
-//                        SDL_Rect bRect = p_bullet->GetRect();
-//
-//                        bool bCol = SDLCommonFunction::CheckCollision(bRect,tRect);
-//                        if(bCol==true){
-//                            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Die.wav"), 0);
-//
-//                            mark_value++;
-//                            p_player.RemoveBullet(r);
-//                            obj_threat-> Free();
-//                            threats_list.erase(threats_list.begin()+t);
-//                        }
-//                    }
-//                }
-//            }
-//		}
+		for (int i = 0; i < threats_list.size(); i++) {
+			ThreatsObject* p_threat = threats_list.at(i);
+			if (p_threat != NULL) {
+				p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
+				p_threat->ImpMoveType(g_screen);
+				p_threat->DoPlayer(map_data);
+				p_threat->MakeBullet(g_screen,SCREEN_WIDTH,SCREEN_HEIGHT);
+				p_threat->Show(g_screen);
+
+				SDL_Rect rect_player= p_player.GetRectFrame();
+				bool bCol1=false;
+				std::vector<BulletObject*>tBullet_list=p_threat->get_bullet_list();
+				for(int jj=0;jj<tBullet_list.size();jj++){
+                    BulletObject* Pt_bullet=tBullet_list.at(jj);
+                    if(Pt_bullet!=NULL){
+                        bCol1=SDLCommonFunction::CheckCollision(Pt_bullet->GetRect(),rect_player);
+                        if(bCol1==true){
+                            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Suck 1V2.wav"), 0);
+                            p_threat->RemoveBullet(jj);
+                            break;
+                        }
+                    }
+				}
+				SDL_Rect rect_threat=p_threat->GetRectFrame();
+				bool bCol2=SDLCommonFunction::CheckCollision(rect_player,rect_threat);
+                if(bCol1==true||bCol2==true)
+                {
+                    solanchet++;
+                    if(solanchet<=3)
+                    {
+                        p_player.SetRect(0,0);
+                        p_player.set_comeback_time(30);
+                        SDL_Delay(500);
+                        player_power.DeCrease();
+                        player_power.Render(g_screen);
+                        continue;
+                    }
+                    else
+                    {
+                        if(MessageBox(NULL,"GAME OVER","Info", MB_OK|MB_ICONSTOP)==IDOK)
+                        {
+                            p_threat->Free();
+                            close();
+                            SDL_Quit();
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
+		//lấy danh sách các viên đạn của threats
+		std::vector<BulletObject*>bullet_arr=p_player.get_bullet_list();
+		for(int r=0;r<bullet_arr.size();r++){
+            BulletObject* p_bullet=bullet_arr.at(r);
+            if(p_bullet!=NULL){
+                for(int t=0;t<threats_list.size();t++){
+                    ThreatsObject*obj_threat=threats_list.at(t);
+                    if(obj_threat!=NULL){
+                        SDL_Rect tRect;
+                        tRect.x=obj_threat->GetRect().x;
+                        tRect.y=obj_threat->GetRect().y;
+                        tRect.w=obj_threat->get_width_frame();// không lấy full ảnh của frame
+                        tRect.h=obj_threat->get_height_frame();
+
+                        SDL_Rect bRect = p_bullet->GetRect();
+
+                        bool bCol = SDLCommonFunction::CheckCollision(bRect,tRect);
+                        if(bCol==true){
+                            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Die.wav"), 0);
+
+                            mark_value++;
+                            p_player.RemoveBullet(r);
+                            obj_threat-> Free();
+                            threats_list.erase(threats_list.begin()+t);
+                        }
+                    }
+                }
+            }
+		}
 
 		//xử lý thời gian
         std::string str_time="Time: ";
@@ -370,17 +370,17 @@ int main(int argc, char* argv[])
 			SDL_Delay(delay_time);
 		}
 	}
+
+    for(int i=0; i<threats_list.size(); i++)
+    {
+        ThreatsObject* p_threat=threats_list.at(i);
+        if(p_threat)
+        {
+            p_threat->Free();
+            p_threat=NULL;
+        }
+    }
+    threats_list.clear();
+    close();
+    return 0;
 }
-//    for(int i=0; i<threats_list.size(); i++)
-//    {
-//        ThreatsObject* p_threat=threats_list.at(i);
-//        if(p_threat)
-//        {
-//            p_threat->Free();
-//            p_threat=NULL;
-//        }
-//    }
-//    threats_list.clear();
-//    close();
-//    return 0;
-//}
