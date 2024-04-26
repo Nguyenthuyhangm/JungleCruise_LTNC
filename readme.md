@@ -1,32 +1,24 @@
 
 # Jungle Cruise - Cuộc phiêu lưu kỳ thú của chú khỉ
 Abu - chú khỉ con vừa lớn với mong muốn khám phá thế giới rộng lớn ngoài kia, nhưng rừng rậm Amazon, với những nguy hiểm đầy rình rập và những loài quái vật nguy hiểm, liệu chú khỉ có thể vượt qua và đạt được mong muốn của mình, tìm kiếm được kho báu lớn nhất? Hãy cùng nhau giúp chú khỉ ấy nhé!
-
+Link vid https://www.youtube.com/watch?v=kAHuMUmS6t4
+Demo https://www.youtube.com/watch?v=HFp6OpSvL3c
 ## Ảnh minh họa
 
 ![menu.png](https://up-anh.vi-vn.vn/img/1714121077_bcd94c39272f848e539e40710109c78e.png)
 
 ## Giới thiệu về game
 - [0. Cách tải game](#0-cách-tải-game)
-    * [a. Cách 1: Không bao gồm code.](#a-cách-1-không-bao-gồm-code)
-    * [b. Cách 2: Bao gồm code và có thể biên dịch.](#b-cách-2-bao-gồm-code-và-có-thể-biên-dịch)
 - [1. Bắt đầu game](#1bắt-đầu-game)
 - [2. Các thành phần trong game:](#2-các-thành-phần-trong-game)
 - [3. Cách chơi](#3-cách-chơi)
-    * [a. Các loại thao tác](#acác-loại-cây)
-    * [b. Các loại địch](#bcác-loại-zombie)
-- [4. Chiến thắng và thất bại](#4-chiến-thắng-và-thất-bại)
+    * [a. Các loại thao tác]
+    * [b. Các loại địch]
+- [4. Chiến thắng và thất bại]
 - [Về đồ họa của game:](#về-đồ-họa-của-game)
 - [Về source code game](#về-source-code-game)
 # 0. Cách tải game
-## a. Cách 1: Không bao gồm code.
-
-Tải game (được nén thành .zip) tại link
-sau: https://github.com/nmhienbn/PVZ-Kaito-NMH-Edition/releases/tag/published<br/>
-Cách này tiết kiệm bộ nhớ và thời gian tải đi rất nhiều (khoảng 103MB).<br/>
-Giải nén game vào một thư mục và bật pvz.exe lên và chơi.<br/>
-
-## b. Cách 2: Bao gồm code và có thể biên dịch.
+ Bao gồm code và có thể biên dịch.
 
 **Bước 1:** Clone repo này về (Khoảng 800 MB - do có cả lịch sử các phiên bản). <br/>
 Hoặc Chọn Code -> Download Zip (Khoảng 90MB)
