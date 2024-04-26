@@ -12,6 +12,7 @@
 using namespace std;
 
 BaseObject g_background3;
+BaseObject g_ground;
 TTF_Font* font_time=NULL;
 int gameState;
 enum gameState
@@ -33,7 +34,7 @@ const SDL_Color WHITE = {255, 255, 255, 255};
 const SDL_Color BLACK = {0, 0, 0, 255};
 const SDL_Color YELLOW = {255, 255, 0, 255};
 const SDL_Color RED = {255, 0, 0, 255};
-const SDL_Color GREEN = {0, 255, 0, 255};
+const SDL_Color GREEN = {0, 84, 139, 84};
 const SDL_Color BLUE = {0, 0, 255, 255};
 const SDL_Color PINK = {255, 192, 203, 255};
 const SDL_Color BROWN = {132, 78, 51, 255};
@@ -104,6 +105,14 @@ bool LoadBackGround3()//Kiểm tra BackGround load lên có bị lỗi hay khôn
 {
     bool ret = g_background3.LoadImg("background1.png", g_screen);
     if (ret == false)
+        return false;
+
+    return true;
+}
+bool LoadImg()//Kiểm tra BackGround load lên có bị lỗi hay không
+{
+    bool res = g_ground.LoadImg("menu.png", g_screen);
+    if (res == false)
         return false;
 
     return true;
@@ -439,7 +448,7 @@ void menu()
     for (int i = 0; i < NUM_BUTTONS; i++)
     {
         SDL_Rect rect = {SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - BUTTON_HEIGHT / 2 + i * (BUTTON_HEIGHT + 50), BUTTON_WIDTH, BUTTON_HEIGHT};
-        Button button(rect, BROWN, font_time, WHITE);
+        Button button(rect, WHITE , font_time, WHITE);
         button.loadTexture(g_screen, menuText[i]);
 
         buttons.push_back(button);
@@ -464,10 +473,13 @@ void menu()
                     if (buttons[i].isMouseInside(g_event.motion.x, g_event.motion.y))
                     {
                         buttons[i].changeColor(SAND);
+
+
+
                     }
                     else
                     {
-                        buttons[i].changeColor(BROWN);
+                        buttons[i].changeColor(GREEN);
                     }
                 }
                 break;
@@ -478,6 +490,7 @@ void menu()
                     if (buttons[i].isMouseInside(g_event.motion.x, g_event.motion.y))
                     {
                         buttons[i].changeColor(SAND);
+                        Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Select 1.wav"), 0);
 
                     }
                 }
@@ -517,7 +530,7 @@ void menu()
             SDL_RenderClear(g_screen);
 
             // Render
-            g_background3.Render(g_screen, NULL);
+            g_ground.Render(g_screen, NULL);
 
 
             for (int i = 0; i < NUM_BUTTONS; i++)
@@ -553,6 +566,8 @@ int main(int argc, char* argv[])
     if (LoadBackGround3() == false)
         return -1;
 
+    if (LoadImg() == false)
+        return -1;
     bool loop = true;
     gameState = MENU;
     while (loop)
@@ -566,7 +581,11 @@ int main(int argc, char* argv[])
 //            help();
 //            break;
         case PLAY:
+            Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Final Quest - World Map.wav"), 0);
+
             play();
+
+
             break;
 //        case LOSE:
 //            lose();
