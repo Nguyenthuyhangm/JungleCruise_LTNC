@@ -110,7 +110,7 @@ vector<ThreatsObject*>MakeThreadsList()
 			p_threat->LoadImg("Base//plant.png", g_screen);
 			p_threat->set_clips();
 			p_threat->set_x_pos(800+ i*500);
-			p_threat->set_y_pos(450);
+			p_threat->set_y_pos(375);
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
 			p_threat->set_input_left(0);
 			list_threats.push_back(p_threat);
@@ -139,10 +139,10 @@ vector<ThreatsObject*>MakeThreadsList()
 		if (p_threat != NULL) {
 			p_threat->LoadImg("Base//ocsen.png", g_screen);
 			p_threat->set_clips();
-			p_threat->set_x_pos(500+ i*500);
-			p_threat->set_y_pos(500);
+			p_threat->set_x_pos(1200+ i*500);
+			p_threat->set_y_pos(350);
 			p_threat->set_type_move(ThreatsObject::STATIC_THREAT);
-			p_threat->set_input_left(1);
+			p_threat->set_input_left(0);
 			list_threats.push_back(p_threat);
 
 		}

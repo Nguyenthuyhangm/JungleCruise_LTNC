@@ -84,6 +84,8 @@
 		<Unit filename="BulletObject.h" />
 		<Unit filename="CommonFuction.cpp" />
 		<Unit filename="CommonFunction.h" />
+		<Unit filename="Dead.cpp" />
+		<Unit filename="Dead.h" />
 		<Unit filename="Enemies/AngryPig/Hit 1 (36x30).png" />
 		<Unit filename="Enemies/AngryPig/Hit 2 (36x30).png" />
 		<Unit filename="Enemies/AngryPig/Idle (36x30).png" />

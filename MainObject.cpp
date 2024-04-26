@@ -384,6 +384,7 @@ void MainObject::Checkmap(Map& map_data)
 				map_data.tile[y2][x1] = 0;
 				map_data.tile[y2][x2] = 0;
 				IncreaseFruit();
+
 			}
 			if (val1 == LACAY || val2 == LACAY) {
 				map_data.tile[y2][x1] = 0;
@@ -408,6 +409,7 @@ void MainObject::Checkmap(Map& map_data)
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
 				IncreaseFruit();
+
 			}
 			if (val1 == LACAY || val2 == LACAY) {
 				map_data.tile[y1][x1] = 0;
