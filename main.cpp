@@ -13,6 +13,7 @@ using namespace std;
 
 BaseObject g_background3;
 BaseObject g_ground;
+BaseObject g_help;
 TTF_Font* font_time=NULL;
 int gameState;
 enum gameState
@@ -117,6 +118,13 @@ bool LoadImg()//Kiểm tra BackGround load lên có bị lỗi hay không
 
     return true;
 }
+bool Help(){
+    bool chekk=g_help.LoadImg("menu.png", g_screen);
+    if (chekk== false)
+        return false;
+
+    return true;
+}
 
 vector<ThreatsObject*>MakeThreadsList()
 {
@@ -215,6 +223,14 @@ vector<ThreatsObject*>MakeThreadsList()
         }
     }
     return list_threats;
+}
+void help(){
+     SDL_RenderClear(g_screen);
+
+            // Render
+    g_help.Render(g_screen, NULL);
+    SDL_RenderPresent(g_screen);
+
 }
 void play()
 {
@@ -568,6 +584,9 @@ int main(int argc, char* argv[])
 
     if (LoadImg() == false)
         return -1;
+
+    if (Help() == false)
+        return -1;
     bool loop = true;
     gameState = MENU;
     while (loop)
@@ -577,9 +596,10 @@ int main(int argc, char* argv[])
         case MENU:
             menu();
             break;
-//        case HELP:
-//            help();
-//            break;
+
+        case HELP:
+            help();
+            break;
         case PLAY:
             Mix_PlayChannel(-1, Mix_LoadWAV("Sound//Final Quest - World Map.wav"), 0);
 
