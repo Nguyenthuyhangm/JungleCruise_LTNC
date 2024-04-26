@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1713863361 source:c:\users\admin88\documents\junglecruise_ltnc\baseobject.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\baseobject.cpp
 	"BaseObject.h"
 
-1713863361 c:\users\admin88\documents\junglecruise_ltnc\baseobject.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\baseobject.h
 	"CommonFunction.h"
 
-1714058040 c:\users\admin88\documents\junglecruise_ltnc\commonfunction.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\commonfunction.h
 	<string>
 	<SDL.h>
 	<windows.h>
@@ -428,24 +428,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1713947828 source:c:\users\admin88\documents\junglecruise_ltnc\bulletobject.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\bulletobject.cpp
 
-1713901138 source:c:\users\admin88\documents\junglecruise_ltnc\commonfuction.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\commonfuction.cpp
 	"CommonFunction.h"
 
-1713863361 source:c:\users\admin88\documents\junglecruise_ltnc\game_map.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\game_map.cpp
 	<iostream>
 	<fstream>
 	"game_map.h"
 
-1713863361 c:\users\admin88\documents\junglecruise_ltnc\game_map.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\game_map.h
 	"CommonFunction.h"
 	"BaseObject.h"
 
-1713863361 source:c:\users\admin88\documents\junglecruise_ltnc\imptimer.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\imptimer.cpp
 	"CommonFunction.h"
 
-1714059587 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\main.cpp
 	"BaseObject.h"
 	"game_map.h"
 	"MainObject.h"
@@ -455,30 +455,30 @@
 	"Text.h"
 	"Dead.h"
 
-1714058040 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\mainobject.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"BulletObject.h"
 	<vector>
 
-1713897190 c:\users\admin88\documents\junglecruise_ltnc\bulletobject.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\bulletobject.h
 	"BaseObject.h"
 	"CommonFunction.h"
 
-1713863361 c:\users\admin88\documents\junglecruise_ltnc\imptimer.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\imptimer.h
 
-1713970010 c:\users\admin88\documents\junglecruise_ltnc\threatsobject.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\threatsobject.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"BulletObject.h"
 
-1714059271 source:c:\users\admin88\documents\junglecruise_ltnc\mainobject.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\mainobject.cpp
 	"CommonFunction.h"
 	<time.h>
 	<iostream>
 	"Dead.h"
 
-1713970581 source:c:\users\admin88\documents\junglecruise_ltnc\threatsobject.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\threatsobject.cpp
 	<windows.h>
 	<iostream>
 
@@ -588,16 +588,16 @@
 	<windows.h>
 	<iostream>
 
-1714034546 source:c:\users\admin88\documents\junglecruise_ltnc\text.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\text.cpp
 	"Text.h"
 
-1714034343 c:\users\admin88\documents\junglecruise_ltnc\text.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\text.h
 	"CommonFunction.h"
 
-1714054156 source:c:\users\admin88\documents\junglecruise_ltnc\dead.cpp
+1714092913 source:c:\users\admin88\documents\junglecruise_ltnc\dead.cpp
 	"Dead.h"
 
-1714054471 c:\users\admin88\documents\junglecruise_ltnc\dead.h
+1714092913 c:\users\admin88\documents\junglecruise_ltnc\dead.h
 	"CommonFunction.h"
 	"BaseObject.h"
 
