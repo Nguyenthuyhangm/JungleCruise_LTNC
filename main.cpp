@@ -15,6 +15,9 @@ BaseObject g_background3;
 BaseObject g_ground;
 BaseObject g_help;
 TTF_Font* font_time=NULL;
+TTF_Font* font_big=NULL;
+
+
 int gameState;
 enum gameState
 {
@@ -33,7 +36,7 @@ const int BUTTON_HEIGHT = 75;
 // COLORS
 const SDL_Color WHITE = {255, 255, 255, 255};
 const SDL_Color BLACK = {0, 0, 0, 255};
-const SDL_Color YELLOW = {255, 255, 0, 255};
+const SDL_Color YELLOW = {255, 215, 0, 255};
 const SDL_Color RED = {255, 0, 0, 255};
 const SDL_Color GREEN = {0, 84, 139, 84};
 const SDL_Color BLUE = {0, 0, 255, 255};
@@ -73,7 +76,12 @@ bool  InitData()
             success=false;
         }
         font_time = TTF_OpenFont("Font//04B_30__.ttf",18);
+        font_big=TTF_OpenFont("Font//04B_30__.ttf",30);
         if(font_time==NULL)
+        {
+            return success=false;
+        }
+         if(font_big==NULL)
         {
             return success=false;
         }
@@ -119,7 +127,7 @@ bool LoadImg()//Kiểm tra BackGround load lên có bị lỗi hay không
     return true;
 }
 bool Help(){
-    bool chekk=g_help.LoadImg("menu.png", g_screen);
+    bool chekk=g_help.LoadImg("menu1.png", g_screen);
     if (chekk== false)
         return false;
 
@@ -457,14 +465,14 @@ void play()
 
 void menu()
 {
-    const char *menuText[NUM_BUTTONS] = {"Play", "Help", "Quit"}; // Menu text
+    const char *menuText[NUM_BUTTONS] = {"PLAY", "HELP", "QUIT"}; // Menu text
     std::vector<Button> buttons;
 
     // Load buttons
     for (int i = 0; i < NUM_BUTTONS; i++)
     {
         SDL_Rect rect = {SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - BUTTON_HEIGHT / 2 + i * (BUTTON_HEIGHT + 50), BUTTON_WIDTH, BUTTON_HEIGHT};
-        Button button(rect, WHITE , font_time, WHITE);
+        Button button(rect, WHITE , font_big, WHITE);
         button.loadTexture(g_screen, menuText[i]);
 
         buttons.push_back(button);
@@ -495,7 +503,7 @@ void menu()
                     }
                     else
                     {
-                        buttons[i].changeColor(GREEN);
+                        buttons[i].changeColor(YELLOW);
                     }
                 }
                 break;
@@ -536,7 +544,7 @@ void menu()
                     }
                     else
                     {
-                        buttons[i].changeColor(BROWN);
+                        buttons[i].changeColor(YELLOW);
                     }
                 }
                 break;
